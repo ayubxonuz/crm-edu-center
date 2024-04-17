@@ -1,0 +1,3 @@
+export default function Home() {
+  return <main className="ml-60"></main>
+}
