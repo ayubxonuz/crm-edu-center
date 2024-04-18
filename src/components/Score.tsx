@@ -1,4 +1,3 @@
-import {BsThreeDotsVertical} from "react-icons/bs"
 import ScorePopover from "./ScorePopover"
 
 type Tscore = {

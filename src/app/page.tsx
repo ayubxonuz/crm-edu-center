@@ -1,9 +1,9 @@
-import Header from "@/components/Header"
+import TableC from "@/components/TableC"
 
 export default function Home() {
   return (
     <main className="flex justify-between">
-      <Header />
+      <TableC />
     </main>
   )
 }
