@@ -20,7 +20,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="bg-gray-100">
+      <body>
         <SideNavbar />
         <div
           className={`max-container pl-[270px] pr-[30px] ${roboto.className}`}

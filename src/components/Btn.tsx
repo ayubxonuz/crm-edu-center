@@ -1,15 +1,16 @@
 "use client"
 import {Button} from "@material-tailwind/react"
 type btn = {
-  text: string
+  text?: string
   icon?: JSX.Element
+  variant: "gradient" | "filled" | "outlined" | "text"
 }
 
-function Btn({icon, text}: btn) {
+function Btn({icon, text, variant}: btn) {
   return (
     <Button
       className="flex gap-x-1 items-center"
-      variant="gradient"
+      variant={variant}
       placeholder={undefined}
       onPointerEnterCapture={undefined}
       onPointerLeaveCapture={undefined}
