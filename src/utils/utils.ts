@@ -25,4 +25,30 @@ export const studentsData = [
     group: "Frontend ReactJS",
     phone: "+998 94 730 70 06",
   },
+  {
+    id: 1,
+    fullName: "Ayubxon Yuldoshev",
+    birthday: "13 June 2007",
+    address: "Kokand",
+    group: "Frontend ReactJS",
+    phone: "+998 94 730 70 06",
+  },
+  {
+    id: 1,
+    fullName: "Ayubxon Yuldoshev",
+    birthday: "13 June 2007",
+    address: "Kokand",
+    group: "Frontend ReactJS",
+    phone: "+998 94 730 70 06",
+  },
+  {
+    id: 1,
+    fullName: "Ayubxon Yuldoshev",
+    birthday: "13 June 2007",
+    address: "Kokand",
+    group: "Frontend ReactJS",
+    phone: "+998 94 730 70 06",
+  },
 ]
+
+let a = 1

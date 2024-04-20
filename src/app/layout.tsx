@@ -1,8 +1,9 @@
 import type {Metadata} from "next"
 import "./globals.css"
 import {Roboto} from "next/font/google"
-import SideNavbar from "@/components/SideNavbar"
 import Header from "@/components/Header"
+import NextTopLoader from "nextjs-toploader"
+import SideNavbar from "@/components/SideNavbar"
 
 const roboto = Roboto({
   subsets: ["latin"],
@@ -22,6 +23,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
+        <NextTopLoader />
         <SideNavbar />
         <div
           className={`max-container pl-[270px] pr-[30px] ${roboto.className}`}

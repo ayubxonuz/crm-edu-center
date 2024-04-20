@@ -9,11 +9,10 @@ import {
 } from "@/components/ui/table"
 import ScorePopover from "./ScorePopover"
 import {studentsData} from "@/utils/utils"
-import {Fragment} from "react"
 
 function TableC() {
   return (
-    <Table className="w-[90%] mx-auto">
+    <Table>
       <TableCaption>A list of your recent invoices.</TableCaption>
       <TableHeader>
         <TableRow className="select-none">
@@ -27,21 +26,19 @@ function TableC() {
         </TableRow>
       </TableHeader>
       <TableBody>
-        <TableRow>
-          {studentsData.map((student) => (
-            <Fragment key={student.id}>
-              <TableCell className="font-medium">{student.id}</TableCell>
-              <TableCell>{student.fullName}</TableCell>
-              <TableCell>{student.birthday}</TableCell>
-              <TableCell>{student.address}</TableCell>
-              <TableCell>{student.group}</TableCell>
-              <TableCell>{student.phone}</TableCell>
-              <TableCell className="max-w-min w-max">
-                <ScorePopover />
-              </TableCell>
-            </Fragment>
-          ))}
-        </TableRow>
+        {studentsData.map((student) => (
+          <TableRow key={student.id}>
+            <TableCell className="font-medium">{student.id}</TableCell>
+            <TableCell>{student.fullName}</TableCell>
+            <TableCell>{student.birthday}</TableCell>
+            <TableCell>{student.address}</TableCell>
+            <TableCell>{student.group}</TableCell>
+            <TableCell>{student.phone}</TableCell>
+            <TableCell className="max-w-min w-max">
+              <ScorePopover />
+            </TableCell>
+          </TableRow>
+        ))}
       </TableBody>
     </Table>
   )
