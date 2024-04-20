@@ -11,7 +11,7 @@ const roboto = Roboto({
 })
 
 export const metadata: Metadata = {
-  title: "CRM-edu-center",
+  title: "CRM-admin-panel",
   description: "This is admin panel",
 }
 

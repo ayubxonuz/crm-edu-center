@@ -15,7 +15,7 @@ function Courses() {
       </div>
       <div className="flex justify-between mb-4 items-center">
         <FilterStudent />
-        <Btn variant="gradient" text="ADD STUDENT" icon={<FaPlus />} />
+        <Btn variant="gradient" text="ADD COURSES" icon={<FaPlus />} />
       </div>
       {/* <TableC /> */}
       <DataTable
