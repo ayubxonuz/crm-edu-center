@@ -10,12 +10,8 @@ function Header() {
       <Tabs className="mt-5" defaultValue="students">
         <TabsList>
           {tabsData.map((tabs) => (
-            <Link href={tabs.link}>
-              <TabsTrigger
-                className="capitalize"
-                key={tabs.name}
-                value={tabs.name}
-              >
+            <Link key={tabs.id} href={tabs.link}>
+              <TabsTrigger className="capitalize" value={tabs.name}>
                 {tabs.name}
               </TabsTrigger>
             </Link>
