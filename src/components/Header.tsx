@@ -13,7 +13,7 @@ function Header() {
             <Link href={tabs.link}>
               <TabsTrigger
                 className="capitalize"
-                key={tabs.id}
+                key={tabs.name}
                 value={tabs.name}
               >
                 {tabs.name}
