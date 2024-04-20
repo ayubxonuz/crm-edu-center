@@ -50,5 +50,3 @@ export const studentsData = [
     phone: "+998 94 730 70 06",
   },
 ]
-
-let a = 1
