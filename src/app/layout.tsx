@@ -1,7 +1,6 @@
 import type {Metadata} from "next"
 import "./globals.css"
 import {Roboto} from "next/font/google"
-import Header from "@/components/Header"
 import NextTopLoader from "nextjs-toploader"
 import SideNavbar from "@/components/SideNavbar"
 
@@ -28,7 +27,6 @@ export default function RootLayout({
         <div
           className={`max-container pl-[270px] pr-[30px] ${roboto.className}`}
         >
-          <Header />
           {children}
         </div>
       </body>

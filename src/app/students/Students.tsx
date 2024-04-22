@@ -1,3 +1,4 @@
+import AddData from "@/components/AddData"
 import Btn from "@/components/Btn"
 import {DataTable} from "@/components/DataTable"
 import {FilterStudent} from "@/components/FilterStudent"
@@ -6,19 +7,20 @@ import Score from "@/components/Score"
 import {studentsData} from "@/utils/utils"
 import {PlusIcon} from "@heroicons/react/24/outline"
 
-function Courses() {
+function Students() {
   return (
     <main className="grid gap-y-3">
       <Header
-        btnText="ADD COURSES"
+        btnText="ADD STUDENT"
         btnIcon={<PlusIcon width={21} height={21} />}
-        text="Courses"
+        text="Students"
       />
       <div className="flex gap-x-5 mb-5">
-        <Score title="All Students" total="1,232" />
-        <Score title="Girls" total="312" />
-        <Score title="Boys" total="941" />
+        <Score title="All Students" total="1321" />
+        <Score title="Girls" total="1321" />
+        <Score title="Boys" total="1321" />
       </div>
+      <FilterStudent />
       {/* <TableC /> */}
       <DataTable
         columns={[
@@ -52,4 +54,4 @@ function Courses() {
     </main>
   )
 }
-export default Courses
+export default Students

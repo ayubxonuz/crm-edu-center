@@ -1,52 +1,5 @@
-import Btn from "@/components/Btn"
-import {DataTable} from "@/components/DataTable"
-import {FilterStudent} from "@/components/FilterStudent"
-import Score from "@/components/Score"
-import {studentsData} from "@/utils/utils"
-import {FaPlus} from "react-icons/fa"
+import Students from "./students/Students"
 
 export default function Home() {
-  return (
-    <main className="grid gap-y-3">
-      <div className="flex gap-x-5 mb-5">
-        <Score title="All Students" total="1321" />
-        <Score title="Girls" total="1321" />
-        <Score title="Boys" total="1321" />
-      </div>
-      <div className="flex justify-between mb-4 items-center">
-        <FilterStudent />
-        <Btn variant="gradient" text="ADD STUDENT" icon={<FaPlus />} />
-      </div>
-      {/* <TableC /> */}
-      <DataTable
-        columns={[
-          {
-            accessorKey: "id",
-            header: "ID",
-          },
-          {
-            accessorKey: "fullName",
-            header: "Fullname",
-          },
-          {
-            accessorKey: "birthday",
-            header: "Birthday",
-          },
-          {
-            accessorKey: "address",
-            header: "Address",
-          },
-          {
-            accessorKey: "group",
-            header: "Group",
-          },
-          {
-            accessorKey: "phone",
-            header: "Phone",
-          },
-        ]}
-        data={studentsData}
-      />
-    </main>
-  )
+  return <Students />
 }

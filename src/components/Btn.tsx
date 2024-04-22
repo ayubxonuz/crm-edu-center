@@ -9,7 +9,7 @@ type btn = {
 function Btn({icon, text, variant}: btn) {
   return (
     <Button
-      className="flex gap-x-1 items-center"
+      className="flex gap-x-[6px] items-center"
       variant={variant}
       placeholder={undefined}
       onPointerEnterCapture={undefined}

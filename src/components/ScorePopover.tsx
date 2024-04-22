@@ -9,7 +9,7 @@ import {
   MenuList,
   MenuItem,
 } from "@material-tailwind/react"
-import {BsThreeDotsVertical} from "react-icons/bs"
+import { EllipsisHorizontalIcon, EllipsisVerticalIcon } from "@heroicons/react/24/outline"
 
 const navListMenuItems = [
   {
@@ -87,7 +87,7 @@ function ScorePopover() {
               onPointerEnterCapture={undefined}
               onPointerLeaveCapture={undefined}
             >
-              <BsThreeDotsVertical />
+              <EllipsisVerticalIcon />
             </ListItem>
           </Typography>
         </MenuHandler>
