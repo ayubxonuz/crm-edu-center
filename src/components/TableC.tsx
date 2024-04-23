@@ -7,7 +7,6 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-import ScorePopover from "./ScorePopover"
 import {studentsData} from "@/utils/utils"
 
 function TableC() {
@@ -34,9 +33,7 @@ function TableC() {
             <TableCell>{student.address}</TableCell>
             <TableCell>{student.group}</TableCell>
             <TableCell>{student.phone}</TableCell>
-            <TableCell className="max-w-min w-max">
-              <ScorePopover />
-            </TableCell>
+            <TableCell className="max-w-min w-max"></TableCell>
           </TableRow>
         ))}
       </TableBody>
