@@ -1,21 +1,21 @@
-"use client"
-import {Button} from "@material-tailwind/react"
-type btn = {
-  text?: string
-  icon?: JSX.Element
-  variant: "gradient" | "filled" | "outlined" | "text"
+import {Button, ConfigProvider, type ButtonProps} from "antd"
+import {ReactNode} from "react"
+type TBtn = {
+  btnText: string
+  size?: "large" | "middle" | "small"
+  btnIcon?: JSX.Element | ReactNode
+  type?: "primary" | "dashed" | "link" | "text" | "default"
 }
 
-function Btn({icon, text, variant}: btn) {
+function Btn({btnIcon, btnText, type, size}: TBtn) {
   return (
     <Button
-      className="flex gap-x-[6px] items-center"
-      variant={variant}
-      placeholder={undefined}
-      onPointerEnterCapture={undefined}
-      onPointerLeaveCapture={undefined}
+      size={size ?? "large"}
+      icon={btnIcon}
+      type={type ?? "primary"}
+      className="flex items-center"
     >
-      {icon} {text}
+      {btnText}
     </Button>
   )
 }

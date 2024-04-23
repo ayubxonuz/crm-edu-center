@@ -1,13 +1,8 @@
 import type {Metadata} from "next"
 import "./globals.css"
-import {Roboto} from "next/font/google"
 import NextTopLoader from "nextjs-toploader"
 import SideNavbar from "@/components/SideNavbar"
-
-const roboto = Roboto({
-  subsets: ["latin"],
-  weight: ["100", "300", "400", "500", "700", "900"],
-})
+import {ReduxProvider} from "@/provider/ReduxProvider"
 
 export const metadata: Metadata = {
   title: "CRM-admin-panel",
@@ -22,13 +17,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <NextTopLoader />
-        <SideNavbar />
-        <div
-          className={`max-container pl-[270px] pr-[30px] ${roboto.className}`}
-        >
-          {children}
-        </div>
+        <ReduxProvider>
+          <NextTopLoader />
+          <SideNavbar />
+          <div className={`max-container pl-[270px] pr-[30px] `}>
+            {children}
+          </div>
+        </ReduxProvider>
       </body>
     </html>
   )

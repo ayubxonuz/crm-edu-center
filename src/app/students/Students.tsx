@@ -1,5 +1,3 @@
-import AddData from "@/components/AddData"
-import Btn from "@/components/Btn"
 import {DataTable} from "@/components/DataTable"
 import {FilterStudent} from "@/components/FilterStudent"
 import Header from "@/components/Header"

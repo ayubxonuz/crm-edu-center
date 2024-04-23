@@ -1,6 +1,5 @@
-import {PlusIcon} from "@heroicons/react/24/outline"
+import {FunnelIcon} from "@heroicons/react/24/outline"
 import Btn from "./Btn"
-
 type THeader = {
   text: string
   btnText: string
@@ -11,7 +10,13 @@ function Header({text, btnText, btnIcon}: THeader) {
     <div className="w-full mt-5">
       <div className="flex justify-between">
         <h1 className="text-3xl font-semibold">{text}</h1>
-        <Btn variant="gradient" text={btnText} icon={btnIcon} />
+        <div className="flex gap-x-3">
+          <Btn
+            btnText="FILTER"
+            btnIcon={<FunnelIcon width={21} height={21} />}
+          />
+          <Btn btnIcon={btnIcon} btnText={btnText} />
+        </div>
       </div>
       {/* <Tabs className="mt-5" defaultValue="students">
         <TabsList>

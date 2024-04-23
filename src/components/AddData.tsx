@@ -1,4 +1,4 @@
-import MTInput from "./MTInput"
+import MTInput from "./AInput"
 import MTSelect from "./MTSelect"
 
 function AddData() {
