@@ -1,14 +1,4 @@
-import MTInput from "./AInput"
-import MTSelect from "./MTSelect"
-
 function AddData() {
-  return (
-    <div className="flex gap-x-3">
-      <MTInput label="FullName" />
-      <input className="border-[2px] rounded-lg" type="date" />
-      <MTInput label="Address" />
-      <MTSelect />
-    </div>
-  )
+  return <div></div>
 }
 export default AddData
