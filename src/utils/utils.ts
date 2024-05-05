@@ -1,3 +1,4 @@
+import axios from "axios"
 export const tabsData = [
   {
     id: 1,
@@ -50,3 +51,8 @@ export const studentsData = [
     phone: "+998 94 730 70 06",
   },
 ]
+
+const baseURL = "https://it-center-backend-r4no.onrender.com/"
+export const customFetch = axios.create({
+  baseURL: baseURL,
+})

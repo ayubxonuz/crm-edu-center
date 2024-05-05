@@ -15,6 +15,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
+import {Skeleton} from "./ui/skeleton"
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
@@ -69,7 +70,38 @@ export function DataTable<TData, TValue>({
           ) : (
             <TableRow>
               <TableCell colSpan={columns.length} className="h-24 text-center">
-                No results.
+                <div className="flex">
+                  <div className="grid gap-y-3">
+                    <Skeleton className="h-4 w-[50px]" />
+                    <Skeleton className="h-4 w-[50px]" />
+                    <Skeleton className="h-4 w-[50px]" />
+                  </div>
+                  <div className="grid gap-y-3 ml-[85px]">
+                    <Skeleton className="h-4 w-[200px]" />
+                    <Skeleton className="h-4 w-[200px]" />
+                    <Skeleton className="h-4 w-[200px]" />
+                  </div>
+                  <div className="grid gap-y-3 ml-[140px]">
+                    <Skeleton className="h-4 w-[200px]" />
+                    <Skeleton className="h-4 w-[200px]" />
+                    <Skeleton className="h-4 w-[200px]" />
+                  </div>
+                  <div className="grid gap-y-3 ml-[120px]">
+                    <Skeleton className="h-4 w-[200px]" />
+                    <Skeleton className="h-4 w-[200px]" />
+                    <Skeleton className="h-4 w-[200px]" />
+                  </div>
+                  <div className="grid gap-y-3 ml-[110px]">
+                    <Skeleton className="h-4 w-[200px]" />
+                    <Skeleton className="h-4 w-[200px]" />
+                    <Skeleton className="h-4 w-[200px]" />
+                  </div>
+                  <div className="grid gap-y-3 ml-[55px]">
+                    <Skeleton className="h-4 w-[200px]" />
+                    <Skeleton className="h-4 w-[200px]" />
+                    <Skeleton className="h-4 w-[200px]" />
+                  </div>
+                </div>
               </TableCell>
             </TableRow>
           )}

@@ -2,8 +2,7 @@
 import {UserOutlined} from "@ant-design/icons"
 import {DatePicker, Select, SelectProps, Space} from "antd"
 import Input from "antd/es/input/Input"
-import {MapPinIcon, FunnelIcon} from "@heroicons/react/24/outline"
-import Btn from "./Btn"
+import {MapPinIcon} from "@heroicons/react/24/outline"
 export function FilterStudent() {
   const options: SelectProps["options"] = [
     {
@@ -33,7 +32,7 @@ export function FilterStudent() {
   ]
   return (
     <div className="flex items-center gap-x-4">
-      <h5 className="text-2xl font-medium">Filter:</h5>
+      <h5 className="text-xl font-medium">Filter:</h5>
       <Input
         className="w-72"
         size="large"
