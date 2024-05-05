@@ -45,17 +45,6 @@ function Header({text, btnText, btnIcon}: THeader) {
           </Button>
         </div>
       </div>
-      {/* <Tabs className="mt-5" defaultValue="students">
-        <TabsList>
-          {tabsData.map((tabs) => (
-            <Link key={tabs.id} href={tabs.link}>
-              <TabsTrigger className="capitalize" value={tabs.name}>
-                {tabs.name}
-              </TabsTrigger>
-            </Link>
-          ))}
-        </TabsList>
-      </Tabs> */}
       <hr className="border-black border-opacity-25 mt-4 mb-10" />
     </div>
   )

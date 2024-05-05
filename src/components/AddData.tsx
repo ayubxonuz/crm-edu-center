@@ -4,11 +4,12 @@ import {UserOutlined} from "@ant-design/icons"
 import {MapPinIcon, PlusIcon} from "@heroicons/react/24/outline"
 import {Controller, useForm} from "react-hook-form"
 import {useMutation, useQueryClient} from "@tanstack/react-query"
-import {customFetch} from "@/utils/utils"
+import {customFetch, formatDate} from "@/utils/utils"
 import {toast} from "sonner"
 const {Search} = Input
 
 type TInputs = {
+  id: number
   fullName: string
   birthday: string
   address: string
@@ -45,8 +46,9 @@ function AddData() {
 
   const onSubmit = (studentsFormData: IStudents) => {
     mutateAsync({
+      id: studentsFormData.id,
       fullName: studentsFormData.fullName,
-      birthday: studentsFormData.birthday,
+      birthday: formatDate(studentsFormData.birthday),
       address: studentsFormData.address,
       group: studentsFormData.group,
       phone: studentsFormData.phone,

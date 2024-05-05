@@ -1,9 +1,8 @@
 "use client"
-import {DataTable} from "@/components/DataTable"
+import DataTable from "@/components/DataTable"
 import FilterAndAddData from "@/components/FilterAndAddData"
 import Header from "@/components/Header"
 import Score from "@/components/Score"
-import {Loading} from "@/components/ui/Loading"
 import {customFetch} from "@/utils/utils"
 import {PlusIcon} from "@heroicons/react/24/outline"
 import {useQuery} from "@tanstack/react-query"
@@ -16,7 +15,6 @@ function Students() {
       return students.data
     },
   })
-  console.log(data)
 
   return (
     <main className="grid gap-y-5">
@@ -31,39 +29,7 @@ function Students() {
         <Score title="Boys" total="1321" />
       </div>
       <FilterAndAddData />
-      {/* <TableC /> */}
-      {data && (
-        <DataTable
-          columns={[
-            {
-              accessorKey: "id",
-              header: "ID",
-            },
-            {
-              accessorKey: "fullName",
-              header: "Fullname",
-            },
-            {
-              accessorKey: "birthday",
-              header: "Birthday",
-            },
-            {
-              accessorKey: "address",
-              header: "Address",
-            },
-            {
-              accessorKey: "group",
-              header: "Group",
-            },
-            {
-              accessorKey: "phone",
-              header: "Phone",
-            },
-          ]}
-          data={data}
-        />
-      )}
-      {isPending && <Loading />}
+      <DataTable loading={isPending} students={data} />
     </main>
   )
 }
