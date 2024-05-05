@@ -1,7 +1,5 @@
-import {DataTable} from "@/components/DataTable"
 import Header from "@/components/Header"
 import Score from "@/components/Score"
-import {studentsData} from "@/utils/utils"
 import {PlusIcon} from "@heroicons/react/24/outline"
 
 function Lessons() {
@@ -18,35 +16,6 @@ function Lessons() {
         <Score title="Boys" total="941" />
       </div>
       {/* <TableC /> */}
-      <DataTable
-        columns={[
-          {
-            accessorKey: "id",
-            header: "ID",
-          },
-          {
-            accessorKey: "fullName",
-            header: "Fullname",
-          },
-          {
-            accessorKey: "birthday",
-            header: "Birthday",
-          },
-          {
-            accessorKey: "address",
-            header: "Address",
-          },
-          {
-            accessorKey: "group",
-            header: "Group",
-          },
-          {
-            accessorKey: "phone",
-            header: "Phone",
-          },
-        ]}
-        data={studentsData}
-      />
     </main>
   )
 }
