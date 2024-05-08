@@ -1,6 +1,6 @@
 "use client"
 import {useSelector} from "react-redux"
-import AddData from "./AddData"
+import AddData from "./AddStudents"
 import {FilterStudent} from "./FilterStudent"
 import {RootState} from "@/lib/store"
 
@@ -11,7 +11,7 @@ function FilterAndAddData() {
   return (
     <>
       {toggleFilterValue && <FilterStudent />}
-      {toggleAddStudentValue && <AddData />}
+      <AddData isOpen={toggleAddStudentValue} />
     </>
   )
 }

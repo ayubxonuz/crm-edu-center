@@ -20,6 +20,7 @@ function DataTable({loading, students}: TDataTable) {
       title: "ID",
       dataIndex: "id",
       key: "id",
+      className: "w-[65px]",
     },
     {
       title: "FullName",
@@ -86,7 +87,9 @@ function DataTable({loading, students}: TDataTable) {
   })
   return (
     <Table
+      scroll={{y: `calc(80vh - 250px)`}}
       bordered
+      tableLayout="auto"
       loading={loading || isPending}
       columns={studentsTableData}
       dataSource={students}

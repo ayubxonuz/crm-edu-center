@@ -17,8 +17,6 @@ export const tabsData = [
   },
 ]
 
-
-
 export const studentsData = [
   {
     id: 1,
@@ -68,3 +66,20 @@ export const formatDate = (dateString: string): string => {
   }
   return date.toLocaleDateString("en-GB", options)
 }
+
+export const arrToStr = (arr: string[]): string => {
+  if (arr) {
+    return arr.join(", ")
+  } else {
+    return ""
+  }
+}
+
+export function generateRandomNumber(): number {
+  let result = 0
+  for (let i = 0; i < 5; i++) {
+    result = result * 10 + Math.floor(Math.random() * 10)
+  }
+  return result
+}
+

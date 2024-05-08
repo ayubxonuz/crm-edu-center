@@ -4,7 +4,7 @@ import {
   toggleFilterFunc,
 } from "@/lib/features/toggleSlice"
 import {RootState} from "@/lib/store"
-import {FunnelIcon, XCircleIcon} from "@heroicons/react/24/outline"
+import {FunnelIcon} from "@heroicons/react/24/outline"
 import {Button} from "antd"
 import {useDispatch, useSelector} from "react-redux"
 type THeader = {
@@ -14,9 +14,7 @@ type THeader = {
 }
 function Header({text, btnText, btnIcon}: THeader) {
   const dispatch = useDispatch()
-  const {toggleFilterValue, toggleAddStudentValue} = useSelector(
-    (store: RootState) => store.dataSlice
-  )
+  const {toggleFilterValue} = useSelector((store: RootState) => store.dataSlice)
 
   return (
     <div className="w-full mt-5">
@@ -34,14 +32,13 @@ function Header({text, btnText, btnIcon}: THeader) {
             {toggleFilterValue ? "CANCEL" : "FILTER"}
           </Button>
           <Button
-            type={toggleAddStudentValue ? "default" : "primary"}
+            type={"primary"}
             size="large"
-            danger={toggleAddStudentValue}
             onClick={() => dispatch(toggleAddStudentFunc())}
             className="flex items-center"
-            icon={toggleAddStudentValue || btnIcon}
+            icon={btnIcon}
           >
-            {toggleAddStudentValue ? "CANCEL" : btnText}
+            {btnText}
           </Button>
         </div>
       </div>

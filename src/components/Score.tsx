@@ -1,6 +1,6 @@
 type Tscore = {
   title: string
-  total: string
+  total: number
 }
 
 function Score({title, total}: Tscore) {

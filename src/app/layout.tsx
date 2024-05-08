@@ -3,11 +3,16 @@ import "./globals.css"
 import NextTopLoader from "nextjs-toploader"
 import SideNavbar from "@/components/SideNavbar"
 import {ReduxProvider} from "@/provider/ReduxProvider"
+import {Inter, Montserrat, Roboto} from "next/font/google"
 
 export const metadata: Metadata = {
   title: "CRM-admin-panel",
   description: "This is admin panel",
 }
+
+const montserrat = Montserrat({
+  subsets: ["latin"],
+})
 
 export default function RootLayout({
   children,
@@ -16,7 +21,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>
+      <body className={montserrat.className}>
         <ReduxProvider>
           <NextTopLoader />
           <SideNavbar />
