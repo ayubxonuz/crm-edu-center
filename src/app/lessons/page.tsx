@@ -11,9 +11,9 @@ function Lessons() {
         text="Lessons"
       />
       <div className="flex gap-x-5 mb-5">
-        <Score title="All Students" total="1,232" />
-        <Score title="Girls" total="312" />
-        <Score title="Boys" total="941" />
+        <Score title="All Students" total={1232} />
+        <Score title="Girls" total={312} />
+        <Score title="Boys" total={941} />
       </div>
       {/* <TableC /> */}
     </main>
