@@ -91,6 +91,8 @@ function AddData({isOpen}: {isOpen: boolean}) {
       address: studentsFormData.address,
       group: arrToStr(studentsFormData.group),
       phone: studentsFormData.phone,
+      userPercentage: 13,
+      userPhoto: "",
     })
   }
 
