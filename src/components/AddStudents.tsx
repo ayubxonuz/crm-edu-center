@@ -5,8 +5,7 @@ import {Controller, useForm} from "react-hook-form"
 import {useMutation, useQueryClient} from "@tanstack/react-query"
 import {customFetch, generateRandomNumber, selectGroup} from "@/utils/utils"
 import {toast} from "sonner"
-import {RootState} from "@/lib/store"
-import {useDispatch, useSelector} from "react-redux"
+import {useDispatch} from "react-redux"
 import {toggleAddStudentFunc} from "@/lib/features/toggle/toggleSlice"
 import dayjs from "dayjs"
 import {ChangeEvent, useState} from "react"
@@ -89,7 +88,7 @@ function AddData({isOpen}: {isOpen: boolean}) {
             <Controller
               name="userPhoto"
               control={control}
-              render={({field}) => (
+              render={() => (
                 <input
                   type="file"
                   className="absolute inset-0 opacity-0 z-10 cursor-pointer"

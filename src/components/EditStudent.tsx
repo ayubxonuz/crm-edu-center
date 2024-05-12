@@ -3,13 +3,10 @@ import {Button, DatePicker, Input, Select, Space} from "antd"
 import {PlusIcon, XMarkIcon} from "@heroicons/react/24/outline"
 import {Controller, useForm} from "react-hook-form"
 import {useMutation, useQueryClient} from "@tanstack/react-query"
-import {customFetch, generateRandomNumber, selectGroup} from "@/utils/utils"
+import {customFetch, selectGroup} from "@/utils/utils"
 import {toast} from "sonner"
 import {useDispatch, useSelector} from "react-redux"
-import {
-  toggleAddStudentFunc,
-  toggleEditStudentFunc,
-} from "@/lib/features/toggle/toggleSlice"
+import {toggleEditStudentFunc} from "@/lib/features/toggle/toggleSlice"
 import dayjs from "dayjs"
 import {RootState} from "@/lib/store"
 
@@ -66,7 +63,6 @@ function EditStudent({isOpen}: {isOpen: boolean}) {
       userPhoto: "https://mighty.tools/mockmind-api/content/human/65.jpg",
     })
   }
-
 
   return (
     <div
