@@ -18,7 +18,7 @@ export const tabsData = [
   },
 ]
 
-const baseURL = "http://localhost:3000/api/"
+const baseURL = "https://it-center-admin-panel.vercel.app/api/"
 export const customFetch = axios.create({
   baseURL: baseURL,
 })
