@@ -14,6 +14,7 @@ function Students() {
       return students.data
     },
   })
+
   return (
     <main className="grid gap-y-5">
       <Header

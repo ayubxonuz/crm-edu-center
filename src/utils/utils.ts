@@ -18,7 +18,7 @@ export const tabsData = [
   },
 ]
 
-const baseURL = "https://it-center-backend-r4no.onrender.com/"
+const baseURL = "http://localhost:3000/api/"
 export const customFetch = axios.create({
   baseURL: baseURL,
 })
