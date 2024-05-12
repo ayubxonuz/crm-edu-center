@@ -2,7 +2,7 @@
 import {
   toggleAddStudentFunc,
   toggleFilterFunc,
-} from "@/lib/features/toggleSlice"
+} from "@/lib/features/toggle/toggleSlice"
 import {RootState} from "@/lib/store"
 import {FunnelIcon} from "@heroicons/react/24/outline"
 import {Button} from "antd"
@@ -14,7 +14,7 @@ type THeader = {
 }
 function Header({text, btnText, btnIcon}: THeader) {
   const dispatch = useDispatch()
-  const {toggleFilterValue} = useSelector((store: RootState) => store.dataSlice)
+  const {toggleFilterValue} = useSelector((store: RootState) => store.toggleSlice)
 
   return (
     <div className="w-full mt-5">

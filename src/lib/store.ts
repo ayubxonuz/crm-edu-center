@@ -1,8 +1,9 @@
 import {configureStore} from "@reduxjs/toolkit"
-import dataSlice from "./features/toggleSlice"
+import toggleSlice from "./features/toggle/toggleSlice"
+import studentSlice from "./features/student/studentSlice"
 export const store = () => {
   return configureStore({
-    reducer: {dataSlice},
+    reducer: {toggleSlice, studentSlice},
   })
 }
 

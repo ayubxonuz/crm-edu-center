@@ -1,8 +1,14 @@
 import React from "react"
-import {Button, Space, Table, Tooltip} from "antd"
+import {Button, Modal, Space, Table, Tooltip} from "antd"
 import {PencilSquareIcon, XMarkIcon} from "@heroicons/react/24/outline"
 import {customFetch} from "@/utils/utils"
 import {useMutation, useQueryClient} from "@tanstack/react-query"
+import {ExclamationCircleFilled} from "@ant-design/icons"
+import {toast} from "sonner"
+import {toggleEditStudentFunc} from "@/lib/features/toggle/toggleSlice"
+import {useDispatch} from "react-redux"
+import {setSingleStudentData} from "@/lib/features/student/studentSlice"
+const {confirm} = Modal
 
 type TDataTable = {
   students: IStudents[]
@@ -15,6 +21,29 @@ const deleteStudent = async (id: number) => {
 }
 
 function DataTable({loading, students}: TDataTable) {
+  const dispatch = useDispatch()
+  const showPromiseConfirm = (id: number) => {
+    confirm({
+      title: "Do you want to delete this student?",
+      icon: <ExclamationCircleFilled />,
+      content: "If you delete this, it cannot be recovered!",
+      onOk() {
+        return new Promise<void>((innerResolve, innerReject) => {
+          mutateAsync(id)
+            .then(() => {
+              innerResolve()
+              toast.success("Student successfully deleted")
+            })
+            .catch((error: any) => {
+              innerReject(error)
+              toast.error(error)
+            })
+        })
+      },
+      onCancel() {},
+    })
+  }
+
   const studentsTableData = [
     {
       title: "ID",
@@ -51,13 +80,11 @@ function DataTable({loading, students}: TDataTable) {
       title: "Options",
       className: "w-[120px]",
       key: "options",
-      render: (name: IStudents) => (
+      render: (student: IStudents) => (
         <Space size="small">
           <Tooltip title="Delete">
             <Button
-              onClick={() => {
-                mutateAsync(name.id)
-              }}
+              onClick={() => showPromiseConfirm(student.id)}
               type="primary"
               size="large"
               shape="default"
@@ -67,6 +94,10 @@ function DataTable({loading, students}: TDataTable) {
           </Tooltip>
           <Tooltip title="Edit">
             <Button
+              onClick={() => {
+                dispatch(toggleEditStudentFunc())
+                dispatch(setSingleStudentData(student))
+              }}
               size="large"
               type="primary"
               shape="default"
@@ -79,7 +110,7 @@ function DataTable({loading, students}: TDataTable) {
   ]
   const queryClient = useQueryClient()
 
-  const {mutateAsync, isPending} = useMutation({
+  const {mutateAsync} = useMutation({
     mutationFn: deleteStudent,
     onSuccess: () => {
       queryClient.invalidateQueries({queryKey: ["students"]})
@@ -90,7 +121,8 @@ function DataTable({loading, students}: TDataTable) {
       scroll={{y: `calc(80vh - 250px)`}}
       bordered
       tableLayout="auto"
-      loading={loading || isPending}
+      rowKey="id"
+      loading={loading}
       columns={studentsTableData}
       dataSource={students}
     />

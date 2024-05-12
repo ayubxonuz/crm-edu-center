@@ -1,3 +1,4 @@
+import {SelectProps} from "antd"
 import axios from "axios"
 export const tabsData = [
   {
@@ -17,63 +18,10 @@ export const tabsData = [
   },
 ]
 
-export const studentsData = [
-  {
-    id: 1,
-    fullName: "Ayubxon Yuldoshev",
-    birthday: "13 June 2007",
-    address: "Kokand",
-    group: "Frontend ReactJS",
-    phone: "+998 94 730 70 06",
-  },
-  {
-    id: 1,
-    fullName: "Ayubxon Yuldoshev",
-    birthday: "13 June 2007",
-    address: "Kokand",
-    group: "Frontend ReactJS",
-    phone: "+998 94 730 70 06",
-  },
-  {
-    id: 1,
-    fullName: "Ayubxon Yuldoshev",
-    birthday: "13 June 2007",
-    address: "Kokand",
-    group: "Frontend ReactJS",
-    phone: "+998 94 730 70 06",
-  },
-  {
-    id: 1,
-    fullName: "Ayubxon Yuldoshev",
-    birthday: "13 June 2007",
-    address: "Kokand",
-    group: "Frontend ReactJS",
-    phone: "+998 94 730 70 06",
-  },
-]
-
 const baseURL = "https://it-center-backend-r4no.onrender.com/"
 export const customFetch = axios.create({
   baseURL: baseURL,
 })
-
-export const formatDate = (dateString: string): string => {
-  const date: Date = new Date(dateString)
-  const options: Intl.DateTimeFormatOptions = {
-    day: "2-digit",
-    month: "short",
-    year: "numeric",
-  }
-  return date.toLocaleDateString("en-GB", options)
-}
-
-export const arrToStr = (arr: string[]): string => {
-  if (arr) {
-    return arr.join(", ")
-  } else {
-    return ""
-  }
-}
 
 export function generateRandomNumber(): number {
   let result = 0
@@ -83,3 +31,53 @@ export function generateRandomNumber(): number {
   return result
 }
 
+export const selectGroup: SelectProps["options"] = [
+  {
+    label: "Kotlin",
+    value: "Kotlin",
+    emoji:
+      "https://mathiasfrohlich.gallerycdn.vsassets.io/extensions/mathiasfrohlich/kotlin/1.7.1/1581441165235/Microsoft.VisualStudio.Services.Icons.Default",
+    desc: "Kotlin",
+  },
+  {
+    label: "Java",
+    value: "Java",
+    emoji: "https://www.svgrepo.com/show/303388/java-4-logo.svg",
+    desc: "Java",
+  },
+  {
+    label: "C++",
+    value: "C++",
+    emoji:
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/1822px-ISO_C%2B%2B_Logo.svg.png",
+    desc: "C++",
+  },
+  {
+    label: "Python",
+    value: "Python",
+    emoji:
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Python_logo_51.svg/1200px-Python_logo_51.svg.png",
+    desc: "Python",
+  },
+  {
+    label: "Frontend",
+    value: "Frontend",
+    emoji:
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Unofficial_JavaScript_logo_2.svg/1200px-Unofficial_JavaScript_logo_2.svg.png",
+    desc: "Frontend",
+  },
+  {
+    label: "Android",
+    value: "Android",
+    emoji:
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Android_logo_2019.png/640px-Android_logo_2019.png",
+    desc: "Android",
+  },
+  {
+    label: "Literacy",
+    value: "Literacy",
+    emoji:
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/Circle-icons-computer.svg/768px-Circle-icons-computer.svg.png",
+    desc: "Literacy",
+  },
+]

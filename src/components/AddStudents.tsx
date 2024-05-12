@@ -1,33 +1,31 @@
 "use client"
-import {Button, DatePicker, Input, Select, SelectProps, Space} from "antd"
+import {Button, DatePicker, Input, Select, Space} from "antd"
 import {PlusIcon, XMarkIcon} from "@heroicons/react/24/outline"
 import {Controller, useForm} from "react-hook-form"
 import {useMutation, useQueryClient} from "@tanstack/react-query"
-import {
-  arrToStr,
-  customFetch,
-  formatDate,
-  generateRandomNumber,
-} from "@/utils/utils"
+import {customFetch, generateRandomNumber, selectGroup} from "@/utils/utils"
 import {toast} from "sonner"
 import {RootState} from "@/lib/store"
 import {useDispatch, useSelector} from "react-redux"
-import {toggleAddStudentFunc} from "@/lib/features/toggleSlice"
+import {toggleAddStudentFunc} from "@/lib/features/toggle/toggleSlice"
+import dayjs from "dayjs"
+import {ChangeEvent, useState} from "react"
 
 type TInputs = {
   fullName: string
   birthday: string
   address: string
-  group: string[]
+  group: string
   phone: string
+  userPhoto: string | null
 }
 
 async function addStudents(data: IStudents) {
   try {
-    toast.loading("Please wait, the students is being generated")
+    // toast.loading("Please wait, the students is being generated")
     const res = await customFetch.post("students", data)
-    toast.success("Students created successfully")
-    toast.dismiss()
+    toast.success("Student created successfully")
+    // toast.dismiss()
     return res.data
   } catch (error) {
     toast.error("Failed to create student")
@@ -38,42 +36,11 @@ async function addStudents(data: IStudents) {
 }
 
 function AddData({isOpen}: {isOpen: boolean}) {
-  const {toggleAddStudentValue} = useSelector(
-    (store: RootState) => store.dataSlice
-  )
   const dispatch = useDispatch()
+  const [selectImage, setSelectImage] = useState<string | null>(null)
 
   const queryClient = useQueryClient()
   const {control, handleSubmit} = useForm<TInputs>()
-  const options: SelectProps["options"] = [
-    {
-      label: "Kotlin",
-      value: "Kotlin",
-      emoji:
-        "https://mathiasfrohlich.gallerycdn.vsassets.io/extensions/mathiasfrohlich/kotlin/1.7.1/1581441165235/Microsoft.VisualStudio.Services.Icons.Default",
-      desc: "Kotlin",
-    },
-    {
-      label: "Java",
-      value: "Java",
-      emoji: "https://www.svgrepo.com/show/303388/java-4-logo.svg",
-      desc: "Java",
-    },
-    {
-      label: "C++",
-      value: "C++",
-      emoji:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/1822px-ISO_C%2B%2B_Logo.svg.png",
-      desc: "C++",
-    },
-    {
-      label: "Python",
-      value: "Python",
-      emoji:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Python_logo_51.svg/1200px-Python_logo_51.svg.png",
-      desc: "Python",
-    },
-  ]
 
   const {mutateAsync, isPending} = useMutation({
     mutationFn: addStudents,
@@ -87,19 +54,24 @@ function AddData({isOpen}: {isOpen: boolean}) {
     mutateAsync({
       id: generateRandomNumber(),
       fullName: studentsFormData.fullName,
-      birthday: formatDate(studentsFormData.birthday),
+      birthday: dayjs(studentsFormData.birthday).format("MMM D, YYYY"),
       address: studentsFormData.address,
-      group: arrToStr(studentsFormData.group),
-      phone: studentsFormData.phone,
+      group: studentsFormData.group,
+      phone: studentsFormData.phone ?? "",
       userPercentage: 13,
-      userPhoto: "",
+      userPhoto: selectImage ?? "",
     })
+  }
+
+  const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const file: File | undefined = event.target.files?.[0]
+    file && setSelectImage(URL.createObjectURL(file))
   }
 
   return (
     <div
       className={`fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50 z-40 transition-all duration-300 ${
-        toggleAddStudentValue ? "opacity-100" : "opacity-0 pointer-events-none"
+        isOpen ? "opacity-100" : "opacity-0 pointer-events-none"
       }`}
     >
       <div className="bg-white z-50 w-full mx-80 p-6 rounded-lg shadow-lg">
@@ -112,16 +84,32 @@ function AddData({isOpen}: {isOpen: boolean}) {
             <XMarkIcon width={25} height={25} />
           </button>
         </div>
-        <div className="flex w-full">
-          <div className="border-dashed w-[500px] h-[400px] border border-black">
-            <span className="flex h-full w-full items-center justify-center">
-              SELECT IMAGE
-            </span>
+        <form onSubmit={handleSubmit(onSubmit)} className="flex w-full">
+          <div className="border-dashed w-[500px] h-[400px] border border-black relative">
+            <Controller
+              name="userPhoto"
+              control={control}
+              render={({field}) => (
+                <input
+                  type="file"
+                  className="absolute inset-0 opacity-0 z-10 cursor-pointer"
+                  onChange={(e) => handleFileChange(e)}
+                />
+              )}
+            />
+            {selectImage ? (
+              <img
+                src={selectImage}
+                alt="Selected File"
+                className="h-full w-full object-cover"
+              />
+            ) : (
+              <span className="flex h-full w-full items-center justify-center">
+                Click to Upload
+              </span>
+            )}
           </div>
-          <form
-            onSubmit={handleSubmit(onSubmit)}
-            className="grid mt-5 grid-cols-2 gap-3 h-min w-full ml-5"
-          >
+          <div className="grid mt-5 grid-cols-2 gap-3 h-min w-full ml-5">
             <div className="w-full">
               <h5 className="text-lg opacity-70 font-medium">Fullname:</h5>
               <Controller
@@ -166,9 +154,10 @@ function AddData({isOpen}: {isOpen: boolean}) {
                   <Select
                     {...field}
                     size="large"
+                    maxCount={1}
                     className="h-10 w-full"
                     mode="multiple"
-                    options={options}
+                    options={selectGroup}
                     optionRender={(option) => (
                       <Space>
                         <span role="img" aria-label={option.data.label}>
@@ -213,8 +202,8 @@ function AddData({isOpen}: {isOpen: boolean}) {
                 SUBMIT
               </Button>
             </div>
-          </form>
-        </div>
+          </div>
+        </form>
       </div>
     </div>
   )

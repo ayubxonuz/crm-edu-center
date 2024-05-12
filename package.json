@@ -25,6 +25,7 @@
     "axios": "^1.6.8",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
+    "dayjs": "^1.11.11",
     "next": "^14.2.1",
     "nextjs-toploader": "^1.6.11",
     "react": "^18",

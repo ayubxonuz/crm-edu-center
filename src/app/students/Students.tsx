@@ -1,6 +1,6 @@
 "use client"
 import DataTable from "@/components/DataTable"
-import FilterAndAddData from "@/components/FilterAndAddStudents"
+import FilterAndAddData from "@/components/FilterAddEdit"
 import Header from "@/components/Header"
 import Score from "@/components/Score"
 import {customFetch} from "@/utils/utils"
