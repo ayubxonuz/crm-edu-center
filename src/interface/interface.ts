@@ -8,3 +8,14 @@ interface IStudents {
   userPhoto: string
   userPercentage: number
 }
+
+interface ICategory {
+  id: number
+  image: string
+  language: string
+}
+
+interface IAds {
+  id: number
+  image: string
+}

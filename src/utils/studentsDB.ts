@@ -2,7 +2,7 @@ let students: IStudents[] = [
   {
     id: 31211,
     fullName: "Qobiljon Sulaymonov",
-    birthday: "12 Jun 2000",
+    birthday: "May 10, 2024",
     address: "Beshkapa",
     group: "Android",
     phone: "+998 91 311 52 43",
@@ -12,7 +12,7 @@ let students: IStudents[] = [
   {
     id: 31212,
     fullName: "Islomjon Tursunaliyev",
-    birthday: "12 Jun 2000",
+    birthday: "May 10, 2024",
     address: "Beshkapa",
     group: "Android",
     phone: "+998 91 311 52 43",
@@ -22,7 +22,7 @@ let students: IStudents[] = [
   {
     id: 31213,
     fullName: "Hushnudbek Ravshanov",
-    birthday: "12 Jun 2000",
+    birthday: "May 10, 2024",
     address: "Beshkapa",
     group: "Android",
     phone: "+998 91 311 52 43",
@@ -32,7 +32,7 @@ let students: IStudents[] = [
   {
     id: 31214,
     fullName: "Abdulatifjon Ahmadjonov",
-    birthday: "12 Jun 2000",
+    birthday: "May 10, 2024",
     address: "Beshkapa",
     group: "Android",
     phone: "+998 91 311 52 43",
@@ -42,7 +42,7 @@ let students: IStudents[] = [
   {
     id: 31215,
     fullName: "Rahmatillo Raxmonaliyev",
-    birthday: "12 Jun 2000",
+    birthday: "May 10, 2024",
     address: "Beshkapa",
     group: "Android",
     phone: "+998 91 311 52 43",
@@ -52,7 +52,7 @@ let students: IStudents[] = [
   {
     id: 31216,
     fullName: "Begzodjon Bo'riboyev",
-    birthday: "12 Jun 2000",
+    birthday: "May 10, 2024",
     address: "Beshkapa",
     group: "Android",
     phone: "+998 91 311 52 43",
@@ -62,7 +62,7 @@ let students: IStudents[] = [
   {
     id: 31217,
     fullName: "Amirxon Murodov",
-    birthday: "12 Jun 2000",
+    birthday: "May 10, 2024",
     address: "Beshkapa",
     group: "Kotlin",
     phone: "+998 91 311 52 43",
@@ -72,7 +72,7 @@ let students: IStudents[] = [
   {
     id: 31218,
     fullName: "Bexruzbek Baxtiyorjonov",
-    birthday: "12 Jun 2000",
+    birthday: "May 10, 2024",
     address: "Beshkapa",
     group: "Kotlin",
     phone: "+998 91 311 52 43",
@@ -82,7 +82,7 @@ let students: IStudents[] = [
   {
     id: 31219,
     fullName: "Islomjon Abdusalomov",
-    birthday: "12 Jun 2000",
+    birthday: "May 10, 2024",
     address: "Beshkapa",
     group: "Kotlin",
     phone: "+998 91 311 52 43",
@@ -92,7 +92,7 @@ let students: IStudents[] = [
   {
     id: 31220,
     fullName: "Boburjon Maxmudov",
-    birthday: "12 Jun 2000",
+    birthday: "May 10, 2024",
     address: "Beshkapa",
     group: "Python",
     phone: "+998 91 311 52 43",
@@ -102,7 +102,7 @@ let students: IStudents[] = [
   {
     id: 31221,
     fullName: "Jasurbek Marufov",
-    birthday: "12 Jun 2000",
+    birthday: "May 10, 2024",
     address: "Beshkapa",
     group: "Python",
     phone: "+998 91 311 52 43",
@@ -112,7 +112,7 @@ let students: IStudents[] = [
   {
     id: 31222,
     fullName: "Muhammadqodir Syfiddinov",
-    birthday: "12 Jun 2000",
+    birthday: "May 10, 2024",
     address: "Beshkapa",
     group: "Python",
     phone: "+998 91 311 52 43",
@@ -122,7 +122,7 @@ let students: IStudents[] = [
   {
     id: 31223,
     fullName: "Javlonbek Anvarov",
-    birthday: "12 Jun 2000",
+    birthday: "May 10, 2024",
     address: "Beshkapa",
     group: "Python",
     phone: "+998 91 311 52 43",
@@ -132,7 +132,7 @@ let students: IStudents[] = [
   {
     id: 31224,
     fullName: "Javohir Qodirjonov",
-    birthday: "12 Jun 2000",
+    birthday: "May 10, 2024",
     address: "Beshkapa",
     group: "Python",
     phone: "+998 91 311 52 43",
@@ -142,7 +142,7 @@ let students: IStudents[] = [
   {
     id: 31225,
     fullName: "Azizhon Saminjonov",
-    birthday: "12 Jun 2000",
+    birthday: "May 10, 2024",
     address: "Beshkapa",
     group: "Python",
     phone: "+998 91 311 52 43",
@@ -152,7 +152,7 @@ let students: IStudents[] = [
   {
     id: 31226,
     fullName: "Husniddin Muxtorov",
-    birthday: "12 Jun 2000",
+    birthday: "May 10, 2024",
     address: "Beshkapa",
     group: "Python",
     phone: "+998 91 311 52 43",
@@ -162,7 +162,7 @@ let students: IStudents[] = [
   {
     id: 31227,
     fullName: "Damir Muhammadov",
-    birthday: "12 Jun 2000",
+    birthday: "May 10, 2024",
     address: "Beshkapa",
     group: "Python",
     phone: "+998 91 311 52 43",
@@ -172,7 +172,7 @@ let students: IStudents[] = [
   {
     id: 31228,
     fullName: "Mirziyo Isroilov",
-    birthday: "12 Jun 2000",
+    birthday: "May 10, 2024",
     address: "Beshkapa",
     group: "Python",
     phone: "+998 91 311 52 43",
@@ -182,7 +182,7 @@ let students: IStudents[] = [
   {
     id: 31229,
     fullName: "Ulug'bek Muhammadiyev",
-    birthday: "12 Jun 2000",
+    birthday: "May 10, 2024",
     address: "Beshkapa",
     group: "Python",
     phone: "+998 91 311 52 43",
@@ -192,7 +192,7 @@ let students: IStudents[] = [
   {
     id: 31230,
     fullName: "Islomjon Abdusattorov",
-    birthday: "12 Jun 2000",
+    birthday: "May 10, 2024",
     address: "Beshkapa",
     group: "Python",
     phone: "+998 91 311 52 43",
@@ -202,7 +202,7 @@ let students: IStudents[] = [
   {
     id: 31231,
     fullName: "Salohiddin Sirojiddinov",
-    birthday: "12 Jun 2000",
+    birthday: "May 10, 2024",
     address: "Beshkapa",
     group: "Python",
     phone: "+998 91 311 52 43",
@@ -212,7 +212,7 @@ let students: IStudents[] = [
   {
     id: 31232,
     fullName: "Behruzbek Sharofiddinov",
-    birthday: "12 Jun 2000",
+    birthday: "May 10, 2024",
     address: "Beshkapa",
     group: "Android",
     phone: "+998 91 311 52 43",
@@ -222,7 +222,7 @@ let students: IStudents[] = [
   {
     id: 31233,
     fullName: "Shamshodbek Raxmataliyev",
-    birthday: "12 Jun 2000",
+    birthday: "May 10, 2024",
     address: "Beshkapa",
     group: "Android",
     phone: "+998 91 311 52 43",
@@ -232,7 +232,7 @@ let students: IStudents[] = [
   {
     id: 31234,
     fullName: "Islomjon Meliqo'ziyev",
-    birthday: "12 Jun 2000",
+    birthday: "May 10, 2024",
     address: "Beshkapa",
     group: "Android",
     phone: "+998 91 311 52 43",
@@ -242,7 +242,7 @@ let students: IStudents[] = [
   {
     id: 31235,
     fullName: "Malikaxon Meliqo'ziyev",
-    birthday: "12 Jun 2000",
+    birthday: "May 10, 2024",
     address: "Beshkapa",
     group: "Android",
     phone: "+998 91 311 52 43",
@@ -252,7 +252,7 @@ let students: IStudents[] = [
   {
     id: 31236,
     fullName: "Boburjon Akramjonov",
-    birthday: "12 Jun 2000",
+    birthday: "May 10, 2024",
     address: "Beshkapa",
     group: "Python",
     phone: "+998 91 311 52 43",
@@ -262,7 +262,7 @@ let students: IStudents[] = [
   {
     id: 31237,
     fullName: "Rashidxon Kabirov",
-    birthday: "12 Jun 2000",
+    birthday: "May 10, 2024",
     address: "Beshkapa",
     group: "Frontend",
     phone: "+998 91 311 52 43",
@@ -272,7 +272,7 @@ let students: IStudents[] = [
   {
     id: 31238,
     fullName: "Azizjon Qoldashev",
-    birthday: "12 Jun 2000",
+    birthday: "May 10, 2024",
     address: "Beshkapa",
     group: "Frontend",
     phone: "+998 91 311 52 43",
@@ -282,7 +282,7 @@ let students: IStudents[] = [
   {
     id: 31239,
     fullName: "Saloxiddin Muxtorov",
-    birthday: "12 Jun 2000",
+    birthday: "May 10, 2024",
     address: "Beshkapa",
     group: "Frontend",
     phone: "+998 91 311 52 43",
@@ -292,7 +292,7 @@ let students: IStudents[] = [
   {
     id: 31240,
     fullName: "Muhammadrizo Anvarov",
-    birthday: "12 Jun 2000",
+    birthday: "May 10, 2024",
     address: "Beshkapa",
     group: "Frontend",
     phone: "+998 91 311 52 43",
@@ -302,7 +302,7 @@ let students: IStudents[] = [
   {
     id: 31241,
     fullName: "Madinaxon Inomova",
-    birthday: "12 Jun 2000",
+    birthday: "May 10, 2024",
     address: "Beshkapa",
     group: "Literacy",
     phone: "+998 91 311 52 43",
@@ -312,7 +312,7 @@ let students: IStudents[] = [
   {
     id: 31242,
     fullName: "Abubakr Anvarov",
-    birthday: "12 Jun 2000",
+    birthday: "May 10, 2024",
     address: "Beshkapa",
     group: "Android",
     phone: "+998 91 311 52 43",
@@ -322,7 +322,7 @@ let students: IStudents[] = [
   {
     id: 31243,
     fullName: "Boburjon Raxmonov",
-    birthday: "12 Jun 2000",
+    birthday: "May 10, 2024",
     address: "Beshkapa",
     group: "Literacy",
     phone: "+998 91 311 52 43",
@@ -332,7 +332,7 @@ let students: IStudents[] = [
   {
     id: 31244,
     fullName: "Muhammdrizo Yo'ldashev",
-    birthday: "12 Jun 2000",
+    birthday: "May 10, 2024",
     address: "Beshkapa",
     group: "Literacy",
     phone: "+998 91 311 52 43",
@@ -342,7 +342,7 @@ let students: IStudents[] = [
   {
     id: 31245,
     fullName: "Umidjon Eshonboyev",
-    birthday: "12 Jun 2000",
+    birthday: "May 10, 2024",
     address: "Beshkapa",
     group: "Literacy",
     phone: "+998 91 311 52 43",
@@ -352,7 +352,7 @@ let students: IStudents[] = [
   {
     id: 31246,
     fullName: "Gavharoy Meliboyeva",
-    birthday: "12 Jun 2000",
+    birthday: "May 10, 2024",
     address: "Beshkapa",
     group: "Literacy",
     phone: "+998 91 311 52 43",
@@ -362,7 +362,7 @@ let students: IStudents[] = [
   {
     id: 31247,
     fullName: "Bexruzbek Raxmonov",
-    birthday: "12 Jun 2000",
+    birthday: "May 10, 2024",
     address: "Beshkapa",
     group: "Literacy",
     phone: "+998 91 311 52 43",
@@ -399,7 +399,7 @@ export const updateStudents = (
     student.userPercentage = userPercentage
     student.userPhoto = userPhoto
   } else {
-    throw new Error("NO POST FOUND")
+    throw new Error("NO STUDENT FOUND")
   }
 }
 

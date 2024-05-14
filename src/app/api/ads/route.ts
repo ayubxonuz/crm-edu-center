@@ -1,10 +1,10 @@
-import {addStudents, getStudents} from "@/utils/studentsDB"
+import {addAd, getAds} from "@/utils/adsDB"
 import {NextResponse} from "next/server"
 
 export const GET = async () => {
   try {
-    const students = getStudents()
-    return NextResponse.json(students)
+    const ads = getAds()
+    return NextResponse.json(ads)
   } catch (error) {
     return NextResponse.json(
       {
@@ -17,29 +17,12 @@ export const GET = async () => {
     )
   }
 }
+
 export const POST = async (req: Request) => {
-  const {
-    id,
-    address,
-    birthday,
-    fullName,
-    group,
-    phone,
-    userPercentage,
-    userPhoto,
-  }: IStudents = await req.json()
+  const {id, image}: IAds = await req.json()
   try {
-    const student = {
-      id,
-      fullName,
-      birthday,
-      address,
-      group,
-      phone,
-      userPhoto,
-      userPercentage,
-    }
-    addStudents(student)
+    const ad = {id, image}
+    addAd(ad)
     return NextResponse.json({message: "OK"}, {status: 200})
   } catch (error) {
     return NextResponse.json(

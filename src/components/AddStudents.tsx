@@ -183,6 +183,7 @@ function AddData({isOpen}: {isOpen: boolean}) {
                   <Input
                     {...field}
                     name="phone"
+                    pattern="[0-9]*"
                     addonBefore="+998"
                     size="large"
                   />

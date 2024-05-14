@@ -1,4 +1,4 @@
-import {deleteStudents, getById, updateStudents} from "@/utils/data"
+import {deleteStudents, getById, updateStudents} from "@/utils/studentsDB"
 import {NextResponse} from "next/server"
 
 export const GET = async (req: Request) => {
@@ -37,7 +37,7 @@ export const DELETE = async (req: Request, res: Response) => {
     return NextResponse.json({message: "ERROR", error}, {status: 500})
   }
 }
-export const PATCH = async (req: Request) => {
+export const PUT = async (req: Request) => {
   try {
     const {
       fullName,

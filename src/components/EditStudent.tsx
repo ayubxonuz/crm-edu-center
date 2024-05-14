@@ -22,7 +22,7 @@ type TInputs = {
 async function editStudent(data: IStudents) {
   try {
     // toast.loading("Please wait, the students is being generated")
-    const res = await customFetch.patch(`students/${data.id}`, data)
+    const res = await customFetch.put(`students/${data.id}`, data)
     toast.success("Student edited successfully")
     // toast.dismiss()
     return res.data
@@ -54,14 +54,16 @@ function EditStudent({isOpen}: {isOpen: boolean}) {
   const onSubmit = (studentsFormData: TInputs) => {
     mutateAsync({
       id: singleStudentData?.id ?? 1,
-      fullName: studentsFormData.fullName,
-      birthday: dayjs(singleStudentData?.birthday).format("MMM D, YYYY"),
-      address: studentsFormData.address,
-      group: studentsFormData.group,
-      phone: studentsFormData.phone,
+      fullName: studentsFormData.fullName ?? singleStudentData?.fullName,
+      birthday: dayjs(studentsFormData?.birthday).format("MMM D, YYYY"),
+      address: studentsFormData.address ?? singleStudentData?.address,
+      group: studentsFormData.group ?? singleStudentData?.group,
+      phone: studentsFormData.phone ?? singleStudentData?.phone,
       userPercentage: 13,
       userPhoto: "https://mighty.tools/mockmind-api/content/human/65.jpg",
     })
+    console.log(studentsFormData?.birthday)
+    console.log(singleStudentData?.birthday)
   }
 
   return (
