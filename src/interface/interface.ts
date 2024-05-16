@@ -19,3 +19,21 @@ interface IAds {
   id: number
   image: string
 }
+
+interface ILessons {
+  id: number
+  lessonName: string
+  language:
+    | "Java"
+    | "Python"
+    | "Kotlin"
+    | "C++"
+    | "Scratch"
+    | "Literacy"
+    | "Android"
+    | "JavaScript"
+    | "Frontend"
+  title: string
+  videoLink: string
+  level: "begin" | "free" | "advanced" | "medium"
+}
