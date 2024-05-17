@@ -1,9 +1,12 @@
-import {addStudents, getStudents} from "@/utils/studentsDB"
+import connectMongoDB from "@/database/mongodb"
+import Students from "@/models/students"
+import {generateRandomNumber} from "@/utils/utils"
 import {NextResponse} from "next/server"
 
 export const GET = async () => {
   try {
-    const students = getStudents()
+    await connectMongoDB()
+    const students = await Students.find()
     return NextResponse.json(students)
   } catch (error) {
     return NextResponse.json(
@@ -19,7 +22,6 @@ export const GET = async () => {
 }
 export const POST = async (req: Request) => {
   const {
-    id,
     address,
     birthday,
     fullName,
@@ -29,17 +31,17 @@ export const POST = async (req: Request) => {
     userPhoto,
   }: IStudents = await req.json()
   try {
-    const student = {
-      id,
-      fullName,
-      birthday,
+    await connectMongoDB()
+    await Students.create({
+      id: generateRandomNumber(),
       address,
+      birthday,
+      fullName,
       group,
       phone,
-      userPhoto,
       userPercentage,
-    }
-    addStudents(student)
+      userPhoto,
+    })
     return NextResponse.json({message: "OK"}, {status: 200})
   } catch (error) {
     return NextResponse.json(

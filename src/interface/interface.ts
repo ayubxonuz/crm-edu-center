@@ -1,4 +1,5 @@
 interface IStudents {
+  _id: string
   id: number
   fullName: string
   birthday: string
@@ -7,12 +8,23 @@ interface IStudents {
   phone: string
   userPhoto: string
   userPercentage: number
+  createdAt: Date
+  updatedAt?: Date
 }
 
 interface ICategory {
   id: number
   image: string
-  language: string
+  language:
+    | "Java"
+    | "Python"
+    | "Kotlin"
+    | "C++"
+    | "Scratch"
+    | "Literacy"
+    | "Android"
+    | "JavaScript"
+    | "Frontend"
 }
 
 interface IAds {

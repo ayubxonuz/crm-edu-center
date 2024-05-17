@@ -1,9 +1,12 @@
-import {addAd, getAds} from "@/utils/adsDB"
+import connectMongoDB from "@/database/mongodb"
+import Ads from "@/models/ads"
+import {generateRandomNumber} from "@/utils/utils"
 import {NextResponse} from "next/server"
 
 export const GET = async () => {
   try {
-    const ads = getAds()
+    await connectMongoDB()
+    const ads = await Ads.find()
     return NextResponse.json(ads)
   } catch (error) {
     return NextResponse.json(
@@ -17,12 +20,14 @@ export const GET = async () => {
     )
   }
 }
-
 export const POST = async (req: Request) => {
-  const {id, image}: IAds = await req.json()
+  const {image}: IAds = await req.json()
   try {
-    const ad = {id, image}
-    addAd(ad)
+    await connectMongoDB()
+    await Ads.create({
+      id: generateRandomNumber(),
+      image,
+    })
     return NextResponse.json({message: "OK"}, {status: 200})
   } catch (error) {
     return NextResponse.json(

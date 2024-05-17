@@ -1,10 +1,13 @@
-import {addCategory, getCategory} from "@/utils/categoryDB"
+import connectMongoDB from "@/database/mongodb"
+import Category from "@/models/category"
+import {generateRandomNumber} from "@/utils/utils"
 import {NextResponse} from "next/server"
 
 export const GET = async () => {
   try {
-    const categorys = getCategory()
-    return NextResponse.json(categorys)
+    await connectMongoDB()
+    const category = await Category.find()
+    return NextResponse.json(category)
   } catch (error) {
     return NextResponse.json(
       {
@@ -17,11 +20,16 @@ export const GET = async () => {
     )
   }
 }
+
 export const POST = async (req: Request) => {
-  const {id, image, language}: ICategory = await req.json()
+  const {image, language}: ICategory = await req.json()
   try {
-    const category = {id, image, language}
-    addCategory(category)
+    await connectMongoDB()
+    await Category.create({
+      id: generateRandomNumber(),
+      image,
+      language,
+    })
     return NextResponse.json({message: "OK"}, {status: 200})
   } catch (error) {
     return NextResponse.json(

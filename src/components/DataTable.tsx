@@ -15,14 +15,14 @@ type TDataTable = {
   loading: boolean
 }
 
-const deleteStudent = async (id: number) => {
+const deleteStudent = async (id: string) => {
   const res = await customFetch.delete(`students/${id}`)
   return res.data
 }
 
 function DataTable({loading, students}: TDataTable) {
   const dispatch = useDispatch()
-  const showPromiseConfirm = (id: number) => {
+  const showPromiseConfirm = (id: string) => {
     confirm({
       title: "Do you want to delete this student?",
       icon: <ExclamationCircleFilled />,
@@ -84,7 +84,7 @@ function DataTable({loading, students}: TDataTable) {
         <Space size="small">
           <Tooltip title="Delete">
             <Button
-              onClick={() => showPromiseConfirm(student.id)}
+              onClick={() => showPromiseConfirm(student._id)}
               type="primary"
               size="large"
               shape="default"

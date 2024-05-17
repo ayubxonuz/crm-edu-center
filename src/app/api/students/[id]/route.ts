@@ -1,24 +1,12 @@
-import {deleteStudents, getById, updateStudents} from "@/utils/studentsDB"
+import connectMongoDB from "@/database/mongodb"
+import Students from "@/models/students"
 import {NextResponse} from "next/server"
 
-export const GET = async (req: Request) => {
+export const GET = async (req: Request, {params}: {params: {id: string}}) => {
   try {
-    const id = req.url.split("students/")[1]
-    const student = getById(+id)
-    if (!student) {
-      return NextResponse.json(
-        {message: "ERROR", student},
-        {
-          status: 404,
-        }
-      )
-    }
-    return NextResponse.json(
-      {message: "OK", student},
-      {
-        status: 200,
-      }
-    )
+    await connectMongoDB()
+    const student = await Students.findOne({_id: params.id})
+    return NextResponse.json(student, {status: 200})
   } catch (error) {
     return NextResponse.json(
       {message: "ERROR", error},
@@ -28,37 +16,36 @@ export const GET = async (req: Request) => {
     )
   }
 }
-export const DELETE = async (req: Request, res: Response) => {
+export const DELETE = async (req: Request) => {
   try {
     const id = req.url.split("students/")[1]
-    deleteStudents(+id)
+    await connectMongoDB()
+    await Students.findByIdAndDelete(id)
     return NextResponse.json({message: "OK"}, {status: 200})
   } catch (error) {
     return NextResponse.json({message: "ERROR", error}, {status: 500})
   }
 }
-export const PUT = async (req: Request) => {
-  try {
-    const {
-      fullName,
-      birthday,
-      address,
-      group,
-      phone,
-      userPercentage,
-      userPhoto,
-    }: IStudents = await req.json()
-    const id = req.url.split("students/")[1]
-    updateStudents(
-      +id,
-      fullName,
-      birthday,
-      address,
-      group,
-      phone,
-      userPhoto,
-      userPercentage
-    )
-    return NextResponse.json({message: "OK"}, {status: 200})
-  } catch (error) {}
+export const PUT = async (req: Request, {params}: {params: {id: number}}) => {
+  const {id} = params
+  const {
+    address,
+    birthday,
+    fullName,
+    group,
+    phone,
+    userPercentage,
+    userPhoto,
+  }: IStudents = await req.json()
+  await connectMongoDB()
+  await Students.findByIdAndUpdate(id, {
+    address,
+    birthday,
+    fullName,
+    group,
+    phone,
+    userPercentage,
+    userPhoto,
+  })
+  return NextResponse.json({message: "OK"}, {status: 200})
 }

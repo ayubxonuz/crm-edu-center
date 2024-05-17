@@ -1,9 +1,12 @@
-import {addLesson, getLessons} from "@/utils/lessonsDB"
+import connectMongoDB from "@/database/mongodb"
+import Lessons from "@/models/lessons"
+import {generateRandomNumber} from "@/utils/utils"
 import {NextResponse} from "next/server"
 
 export const GET = async () => {
   try {
-    const lessons = getLessons()
+    await connectMongoDB()
+    const lessons = await Lessons.find()
     return NextResponse.json(lessons)
   } catch (error) {
     return NextResponse.json(
@@ -17,13 +20,19 @@ export const GET = async () => {
     )
   }
 }
-
 export const POST = async (req: Request) => {
-  const {id, language, lessonName, level, title, videoLink}: ILessons =
+  const {language, lessonName, level, title, videoLink}: ILessons =
     await req.json()
   try {
-    const lesson = {id, language, lessonName, level, title, videoLink}
-    addLesson(lesson)
+    await connectMongoDB()
+    await Lessons.create({
+      id: generateRandomNumber(),
+      language,
+      lessonName,
+      level,
+      title,
+      videoLink,
+    })
     return NextResponse.json({message: "OK"}, {status: 200})
   } catch (error) {
     return NextResponse.json(

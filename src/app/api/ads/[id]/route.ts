@@ -1,24 +1,12 @@
-import {deleteAd, getById, updateAd} from "@/utils/adsDB"
+import connectMongoDB from "@/database/mongodb"
+import Ads from "@/models/ads"
 import {NextResponse} from "next/server"
 
-export const GET = async (req: Request) => {
+export const GET = async (req: Request, {params}: {params: {id: string}}) => {
   try {
-    const id = req.url.split("ads/")[1]
-    const ad = getById(+id)
-    if (!ad) {
-      return NextResponse.json(
-        {message: "ERROR", ad},
-        {
-          status: 404,
-        }
-      )
-    }
-    return NextResponse.json(
-      {message: "OK", ad},
-      {
-        status: 200,
-      }
-    )
+    await connectMongoDB()
+    const ads = await Ads.findOne({_id: params.id})
+    return NextResponse.json(ads, {status: 200})
   } catch (error) {
     return NextResponse.json(
       {message: "ERROR", error},
@@ -28,24 +16,20 @@ export const GET = async (req: Request) => {
     )
   }
 }
-
-export const PUT = async (req: Request) => {
+export const DELETE = async (req: Request) => {
   try {
-    const {image}: IAds = await req.json()
     const id = req.url.split("ads/")[1]
-    updateAd(+id, image)
+    await connectMongoDB()
+    await Ads.findByIdAndDelete(id)
     return NextResponse.json({message: "OK"}, {status: 200})
   } catch (error) {
     return NextResponse.json({message: "ERROR", error}, {status: 500})
   }
 }
-
-export const DELETE = async (req: Request) => {
-  try {
-    const id = req.url.split("ads/")[1]
-    deleteAd(+id)
-    return NextResponse.json({message: "OK"}, {status: 200})
-  } catch (error) {
-    return NextResponse.json({message: "ERROR", error}, {status: 500})
-  }
+export const PUT = async (req: Request, {params}: {params: {id: number}}) => {
+  const {id} = params
+  const {image}: IAds = await req.json()
+  await connectMongoDB()
+  await Ads.findByIdAndUpdate(id, {image})
+  return NextResponse.json({message: "OK"}, {status: 200})
 }

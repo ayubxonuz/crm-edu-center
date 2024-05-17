@@ -51,6 +51,7 @@ function AddData({isOpen}: {isOpen: boolean}) {
 
   const onSubmit = (studentsFormData: TInputs) => {
     mutateAsync({
+      _id: "",
       id: generateRandomNumber(),
       fullName: studentsFormData.fullName,
       birthday: dayjs(studentsFormData.birthday).format("MMM D, YYYY"),
@@ -59,6 +60,7 @@ function AddData({isOpen}: {isOpen: boolean}) {
       phone: studentsFormData.phone ?? "",
       userPercentage: 13,
       userPhoto: selectImage ?? "",
+      createdAt: new Date(),
     })
   }
 
