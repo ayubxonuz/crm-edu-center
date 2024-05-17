@@ -117,7 +117,23 @@ function AddData({isOpen}: {isOpen: boolean}) {
                 control={control}
                 name="fullName"
                 render={({field}) => (
-                  <Input className="h-10" size="large" {...field} />
+                  <Input
+                    className="h-10"
+                    size="large"
+                    {...field}
+                    onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                      const capitalizedValue =
+                        e.target.value.charAt(0).toUpperCase() +
+                        e.target.value.slice(1)
+                      field.onChange({
+                        ...e,
+                        target: {
+                          ...e.target,
+                          value: capitalizedValue,
+                        },
+                      })
+                    }}
+                  />
                 )}
               />
             </div>
