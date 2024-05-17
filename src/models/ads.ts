@@ -7,6 +7,7 @@ const adsSchema = new Schema(
   },
   {
     timestamps: true,
+    versionKey: false,
   }
 )
 

@@ -11,6 +11,7 @@ const lessonsSchema = new Schema(
   },
   {
     timestamps: true,
+    versionKey: false,
   }
 )
 

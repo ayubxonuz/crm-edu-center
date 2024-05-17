@@ -1,5 +1,5 @@
 import React from "react"
-import {Button, Modal, Space, Table, Tooltip} from "antd"
+import {Button, ConfigProvider, Modal, Space, Table, Tooltip} from "antd"
 import {PencilSquareIcon, XMarkIcon} from "@heroicons/react/24/outline"
 import {customFetch} from "@/utils/utils"
 import {useMutation, useQueryClient} from "@tanstack/react-query"
@@ -117,15 +117,21 @@ function DataTable({loading, students}: TDataTable) {
     },
   })
   return (
-    <Table
-      scroll={{y: `calc(80vh - 250px)`}}
-      bordered
-      tableLayout="auto"
-      rowKey="id"
-      loading={loading}
-      columns={studentsTableData}
-      dataSource={students}
-    />
+    <ConfigProvider theme={{
+      token: {
+          colorBgBase: ""
+      }
+    }}>
+      <Table
+        scroll={{y: `calc(80vh - 250px)`}}
+        bordered
+        tableLayout="auto"
+        rowKey="id"
+        loading={loading}
+        columns={studentsTableData}
+        dataSource={students}
+      />
+    </ConfigProvider>
   )
 }
 export default DataTable
