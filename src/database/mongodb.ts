@@ -1,16 +1,18 @@
-import mongoose from "mongoose"
+import mongoose, {ConnectOptions} from "mongoose"
 
 const connectMongoDB = async () => {
   try {
-    const uri = process.env.MONGODB_URI
-    if (!uri) {
-      throw new Error("MongoDB URI is not defined")
-    }
-
-    await mongoose.connect(uri)
-    console.log("Connected to MongoDB.")
-  } catch (error) {
-    console.error("Error connecting to MongoDB:", error)
+    await mongoose.connect(
+      process.env.MONGODB_URI as string,
+      {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+      } as ConnectOptions
+    )
+    console.log("MongoDB connected")
+  } catch (err) {
+    console.error((err as Error).message)
+    process.exit(1)
   }
 }
 
