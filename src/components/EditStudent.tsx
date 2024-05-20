@@ -9,15 +9,7 @@ import {useDispatch, useSelector} from "react-redux"
 import {toggleEditStudentFunc} from "@/lib/features/toggle/toggleSlice"
 import dayjs from "dayjs"
 import {RootState} from "@/lib/store"
-
-type TInputs = {
-  fullName: string
-  birthday: string
-  address: string
-  group: string
-  phone: string
-  userPhoto: string
-}
+import {ChangeEvent, useState} from "react"
 
 async function editStudent(data: IStudents) {
   try {
@@ -35,6 +27,7 @@ async function editStudent(data: IStudents) {
 }
 
 function EditStudent({isOpen}: {isOpen: boolean}) {
+  const [selectImage, setSelectImage] = useState<string | null>(null)
   const dispatch = useDispatch()
 
   const queryClient = useQueryClient()
@@ -58,16 +51,22 @@ function EditStudent({isOpen}: {isOpen: boolean}) {
       fullName: studentsFormData.fullName ?? singleStudentData?.fullName,
       birthday: dayjs(studentsFormData?.birthday).format("MMM D, YYYY"),
       address: studentsFormData.address ?? singleStudentData?.address,
-      group: studentsFormData.group ?? singleStudentData?.group,
+      group: studentsFormData.group ?? singleStudentData?.group?.toString(),
       phone: studentsFormData.phone ?? singleStudentData?.phone,
       userPercentage: 13,
-      userPhoto: "https://mighty.tools/mockmind-api/content/human/65.jpg",
+      userPhoto: selectImage,
       createdAt: singleStudentData?.createdAt ?? new Date(),
       updatedAt:
         singleStudentData?.updatedAt instanceof Date
           ? singleStudentData?.updatedAt
           : new Date(singleStudentData?.updatedAt ?? ""),
     })
+  }
+
+  const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
+    event.preventDefault()
+    const file: File | undefined = event.target.files?.[0]
+    file && setSelectImage(URL.createObjectURL(file))
   }
 
   return (
@@ -87,29 +86,63 @@ function EditStudent({isOpen}: {isOpen: boolean}) {
           </button>
         </div>
         <form onSubmit={handleSubmit(onSubmit)} className="flex w-full">
-          <div className="border-dashed w-[500px] h-[400px] border border-black relative">
-            <Controller
-              name="userPhoto"
-              control={control}
-              render={({field}) => (
-                <input
-                  {...field}
-                  type="file"
-                  className="absolute inset-0 opacity-0 z-10 cursor-pointer"
-                />
-              )}
-            />
+          <div className="w-[500px] h-[400px] grid gap-y-2">
             {singleStudentData?.userPhoto ? (
               <img
                 src={singleStudentData.userPhoto}
                 alt="Selected File"
-                className="h-full w-full object-cover"
+                className="h-[370px] rounded-lg w-full object-cover"
               />
             ) : (
-              <span className="flex h-full w-full items-center justify-center">
-                Click to Upload
-              </span>
+              <div className="flex items-center justify-center w-full h-[370px]">
+                <label className="flex flex-col items-center justify-center w-full h-full border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+                  <div className="flex flex-col items-center justify-center pt-5 pb-6">
+                    <svg
+                      className="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400"
+                      aria-hidden="true"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="`0 0 20 16"
+                    >
+                      <path
+                        stroke="currentColor"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
+                      />
+                    </svg>
+                    <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
+                      <span className="font-semibold">Click to upload</span> or
+                      drag and drop
+                    </p>
+                    <p className="text-xs text-gray-500 dark:text-gray-400">
+                      SVG, PNG, JPG or GIF (MAX. 800x400px)
+                    </p>
+                  </div>
+                  <Controller
+                    name="userPhoto"
+                    control={control}
+                    render={({field}) => (
+                      <input
+                        {...field}
+                        onChange={handleFileChange}
+                        type="file"
+                        className="hidden"
+                        value={field.value || ""}
+                      />
+                    )}
+                  />
+                </label>
+              </div>
             )}
+            <Button
+              disabled={singleStudentData?.userPhoto ? false : true}
+              type="primary"
+              danger
+            >
+              DELETE PHOTO
+            </Button>
           </div>
           <div className="grid mt-5 grid-cols-2 gap-3 h-min w-full ml-5">
             <div className="w-full">
@@ -120,7 +153,23 @@ function EditStudent({isOpen}: {isOpen: boolean}) {
                 key={singleStudentData?.fullName}
                 defaultValue={singleStudentData?.fullName}
                 render={({field}) => (
-                  <Input className="h-10" size="large" {...field} />
+                  <Input
+                    className="h-10"
+                    size="large"
+                    {...field}
+                    onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                      const capitalizedValue =
+                        e.target.value.charAt(0).toUpperCase() +
+                        e.target.value.slice(1)
+                      field.onChange({
+                        ...e,
+                        target: {
+                          ...e.target,
+                          value: capitalizedValue,
+                        },
+                      })
+                    }}
+                  />
                 )}
               />
             </div>
@@ -149,14 +198,30 @@ function EditStudent({isOpen}: {isOpen: boolean}) {
                 key={singleStudentData?.address}
                 defaultValue={singleStudentData?.address}
                 render={({field}) => (
-                  <Input {...field} className="h-10" size="large" />
+                  <Input
+                    {...field}
+                    className="h-10"
+                    size="large"
+                    onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                      const capitalizedValue =
+                        e.target.value.charAt(0).toUpperCase() +
+                        e.target.value.slice(1)
+                      field.onChange({
+                        ...e,
+                        target: {
+                          ...e.target,
+                          value: capitalizedValue,
+                        },
+                      })
+                    }}
+                  />
                 )}
               />
             </div>
             <div className="w-full">
               <h5 className="text-lg opacity-70 font-medium">Group:</h5>
               <Controller
-                key={singleStudentData?.group}
+                key={singleStudentData?.group?.toString()}
                 defaultValue={singleStudentData?.group}
                 name="group"
                 control={control}

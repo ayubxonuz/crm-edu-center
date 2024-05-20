@@ -9,6 +9,7 @@ import {
   EllipsisHorizontalIcon,
   ExclamationCircleIcon,
   FolderPlusIcon,
+  PhotoIcon,
   PlayIcon,
   UserCircleIcon,
   UserGroupIcon,
@@ -29,7 +30,7 @@ function SideNavbar() {
               href="/"
               className="text-base text-center cursor-pointer font-bold text-[#DBE2EF] border-b border-gray-100 pb-4 w-full"
             >
-              Virtual Dashboard
+              IT-CENTER-ADMIN-PANEL
             </Link>
             <div className=" my-4 border-b border-gray-100 pb-4">
               <Link
@@ -71,7 +72,23 @@ function SideNavbar() {
                   Lessons
                 </h3>
               </Link>
-              <div className="flex transition-all mb-2 justify-start items-center gap-4 pl-5 hover:bg-[#3F72AF] p-2 rounded-md group cursor-pointer hover:shadow-lg m-auto">
+              <Link
+                href="/ads"
+                className="flex transition-all mb-2 justify-start items-center gap-4 pl-5 hover:bg-[#3F72AF] p-2 rounded-md group cursor-pointer hover:shadow-lg m-auto"
+              >
+                <PhotoIcon
+                  width={24}
+                  height={24}
+                  className="text-2xl text-[#DBE2EF] group-hover:text-white "
+                />
+                <h3 className="text-base text-[#DBE2EF] group-hover:text-white font-semibold ">
+                  Ads
+                </h3>
+              </Link>
+              <Link
+                href="/profile"
+                className="flex transition-all mb-2 justify-start items-center gap-4 pl-5 hover:bg-[#3F72AF] p-2 rounded-md group cursor-pointer hover:shadow-lg m-auto"
+              >
                 <UserCircleIcon
                   width={24}
                   height={24}
@@ -80,7 +97,7 @@ function SideNavbar() {
                 <h3 className="text-base text-[#DBE2EF] group-hover:text-white font-semibold ">
                   Profile
                 </h3>
-              </div>
+              </Link>
               <div className="flex transition-all mb-2 justify-start items-center gap-4 pl-5 hover:bg-[#3F72AF] p-2 rounded-md group cursor-pointer hover:shadow-lg m-auto">
                 <ChatBubbleLeftEllipsisIcon
                   width={24}

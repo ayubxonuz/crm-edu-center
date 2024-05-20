@@ -21,12 +21,13 @@ export const GET = async () => {
   }
 }
 export const POST = async (req: Request) => {
-  const {image}: IAds = await req.json()
+  const {image, title}: IAds = await req.json()
   try {
     await connectMongoDB()
     await Ads.create({
       id: generateRandomNumber(),
       image,
+      title,
     })
     return NextResponse.json({message: "OK"}, {status: 200})
   } catch (error) {

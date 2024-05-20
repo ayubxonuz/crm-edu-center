@@ -4,6 +4,7 @@ const adsSchema = new Schema(
   {
     id: Number,
     image: String,
+    title: String,
   },
   {
     timestamps: true,

@@ -4,10 +4,10 @@ const lessonsSchema = new Schema(
   {
     id: Number,
     lessonName: String,
-    language: String,
-    title: String,
+    languageName: String,
     videoLink: String,
     level: String,
+    homework: String,
   },
   {
     timestamps: true,

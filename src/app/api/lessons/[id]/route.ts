@@ -1,12 +1,12 @@
 import connectMongoDB from "@/database/mongodb"
-import Students from "@/models/students"
+import Lessons from "@/models/lessons"
 import {NextResponse} from "next/server"
 
 export const GET = async ({params}: {params: {id: string}}) => {
   try {
     await connectMongoDB()
-    const student = await Students.findOne({_id: params.id})
-    return NextResponse.json(student, {status: 200})
+    const lesson = await Lessons.findOne({_id: params.id})
+    return NextResponse.json(lesson, {status: 200})
   } catch (error) {
     return NextResponse.json(
       {message: "ERROR", error},
@@ -16,36 +16,29 @@ export const GET = async ({params}: {params: {id: string}}) => {
     )
   }
 }
+
 export const DELETE = async (req: Request) => {
   try {
-    const id = req.url.split("students/")[1]
+    const id = req.url.split("/lessons")[1]
     await connectMongoDB()
-    await Students.findByIdAndDelete(id)
+    await Lessons.findByIdAndDelete(id)
     return NextResponse.json({message: "OK"}, {status: 200})
   } catch (error) {
     return NextResponse.json({message: "ERROR", error}, {status: 500})
   }
 }
+
 export const PUT = async (req: Request, {params}: {params: {id: number}}) => {
   const {id} = params
-  const {
-    address,
-    birthday,
-    fullName,
-    group,
-    phone,
-    userPercentage,
-    userPhoto,
-  }: IStudents = await req.json()
+  const {lessonName, languageName, videoLink, level, homework}: ILessons =
+    await req.json()
   await connectMongoDB()
-  await Students.findByIdAndUpdate(id, {
-    address,
-    birthday,
-    fullName,
-    group,
-    phone,
-    userPercentage,
-    userPhoto,
+  await Lessons.findByIdAndUpdate(id, {
+    lessonName,
+    languageName,
+    videoLink,
+    level,
+    homework,
   })
   return NextResponse.json({message: "OK"}, {status: 200})
 }

@@ -20,18 +20,19 @@ export const GET = async () => {
     )
   }
 }
+
 export const POST = async (req: Request) => {
-  const {language, lessonName, level, title, videoLink}: ILessons =
+  const {lessonName, languageName, videoLink, level, homework}: ILessons =
     await req.json()
   try {
     await connectMongoDB()
     await Lessons.create({
       id: generateRandomNumber(),
-      language,
       lessonName,
-      level,
-      title,
+      languageName,
       videoLink,
+      level,
+      homework,
     })
     return NextResponse.json({message: "OK"}, {status: 200})
   } catch (error) {

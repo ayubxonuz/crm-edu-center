@@ -1,13 +1,10 @@
 import React from "react"
 import {Button, ConfigProvider, Modal, Space, Table, Tooltip} from "antd"
 import {PencilSquareIcon, XMarkIcon} from "@heroicons/react/24/outline"
-import {customFetch} from "@/utils/utils"
-import {useMutation, useQueryClient} from "@tanstack/react-query"
-import {ExclamationCircleFilled} from "@ant-design/icons"
-import {toast} from "sonner"
 import {toggleEditStudentFunc} from "@/lib/features/toggle/toggleSlice"
 import {useDispatch} from "react-redux"
 import {setSingleStudentData} from "@/lib/features/student/studentSlice"
+import ModalPromise from "./ModalPromise"
 const {confirm} = Modal
 
 type TDataTable = {
@@ -15,34 +12,8 @@ type TDataTable = {
   loading: boolean
 }
 
-const deleteStudent = async (id: string) => {
-  const res = await customFetch.delete(`students/${id}`)
-  return res.data
-}
-
 function DataTable({loading, students}: TDataTable) {
   const dispatch = useDispatch()
-  const showPromiseConfirm = (id: string) => {
-    confirm({
-      title: "Do you want to delete this student?",
-      icon: <ExclamationCircleFilled />,
-      content: "If you delete this, it cannot be recovered!",
-      onOk() {
-        return new Promise<void>((innerResolve, innerReject) => {
-          mutateAsync(id)
-            .then(() => {
-              innerResolve()
-              toast.success("Student successfully deleted")
-            })
-            .catch((error: any) => {
-              innerReject(error)
-              toast.error(error)
-            })
-        })
-      },
-      onCancel() {},
-    })
-  }
 
   const studentsTableData = [
     {
@@ -82,16 +53,7 @@ function DataTable({loading, students}: TDataTable) {
       key: "options",
       render: (student: IStudents) => (
         <Space size="small">
-          <Tooltip title="Delete">
-            <Button
-              onClick={() => showPromiseConfirm(student._id)}
-              type="primary"
-              size="large"
-              shape="default"
-              danger
-              icon={<XMarkIcon width={24} height={24} />}
-            />
-          </Tooltip>
+          <ModalPromise id={student._id} />
           <Tooltip title="Edit">
             <Button
               onClick={() => {
@@ -108,20 +70,14 @@ function DataTable({loading, students}: TDataTable) {
       ),
     },
   ]
-  const queryClient = useQueryClient()
-
-  const {mutateAsync} = useMutation({
-    mutationFn: deleteStudent,
-    onSuccess: () => {
-      queryClient.invalidateQueries({queryKey: ["students"]})
-    },
-  })
   return (
-    <ConfigProvider theme={{
-      token: {
-          colorBgBase: ""
-      }
-    }}>
+    <ConfigProvider
+      theme={{
+        token: {
+          colorBgBase: "",
+        },
+      }}
+    >
       <Table
         scroll={{y: `calc(80vh - 250px)`}}
         bordered

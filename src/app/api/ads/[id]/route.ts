@@ -28,8 +28,8 @@ export const DELETE = async (req: Request) => {
 }
 export const PUT = async (req: Request, {params}: {params: {id: number}}) => {
   const {id} = params
-  const {image}: IAds = await req.json()
+  const {image, title}: IAds = await req.json()
   await connectMongoDB()
-  await Ads.findByIdAndUpdate(id, {image})
+  await Ads.findByIdAndUpdate(id, {image, title})
   return NextResponse.json({message: "OK"}, {status: 200})
 }

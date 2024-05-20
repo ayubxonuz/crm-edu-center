@@ -10,15 +10,6 @@ import {toggleAddStudentFunc} from "@/lib/features/toggle/toggleSlice"
 import dayjs from "dayjs"
 import {ChangeEvent, useState} from "react"
 
-type TInputs = {
-  fullName: string
-  birthday: string
-  address: string
-  group: string
-  phone: string
-  userPhoto: string | null
-}
-
 async function addStudents(data: IStudents) {
   try {
     // toast.loading("Please wait, the students is being generated")
@@ -38,6 +29,8 @@ function AddData({isOpen}: {isOpen: boolean}) {
   const dispatch = useDispatch()
   const [selectImage, setSelectImage] = useState<string | null>(null)
 
+  console.log(selectImage)
+
   const queryClient = useQueryClient()
   const {control, handleSubmit} = useForm<TInputs>()
 
@@ -56,17 +49,19 @@ function AddData({isOpen}: {isOpen: boolean}) {
       fullName: studentsFormData.fullName,
       birthday: dayjs(studentsFormData.birthday).format("MMM D, YYYY"),
       address: studentsFormData.address,
-      group: studentsFormData.group,
+      group: studentsFormData?.group?.toString(),
       phone: studentsFormData.phone ?? "",
       userPercentage: 13,
       userPhoto: selectImage ?? "",
       createdAt: new Date(),
     })
   }
-
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
+    event.preventDefault()
     const file: File | undefined = event.target.files?.[0]
-    file && setSelectImage(URL.createObjectURL(file))
+    if (file) {
+      setSelectImage(URL.createObjectURL(file))
+    }
   }
 
   return (
@@ -86,29 +81,64 @@ function AddData({isOpen}: {isOpen: boolean}) {
           </button>
         </div>
         <form onSubmit={handleSubmit(onSubmit)} className="flex w-full">
-          <div className="border-dashed w-[500px] h-[400px] border border-black relative">
-            <Controller
-              name="userPhoto"
-              control={control}
-              render={() => (
-                <input
-                  type="file"
-                  className="absolute inset-0 opacity-0 z-10 cursor-pointer"
-                  onChange={(e) => handleFileChange(e)}
-                />
-              )}
-            />
+          <div className="w-[500px] h-[400px] grid gap-y-2">
             {selectImage ? (
               <img
                 src={selectImage}
                 alt="Selected File"
-                className="h-full w-full object-cover"
+                className="h-[370px] rounded-lg w-full object-cover"
               />
             ) : (
-              <span className="flex h-full w-full items-center justify-center">
-                Click to Upload
-              </span>
+              <div className="flex items-center justify-center w-full h-[370px]">
+                <label className="flex flex-col items-center justify-center w-full h-full border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+                  <div className="flex flex-col items-center justify-center pt-5 pb-6">
+                    <svg
+                      className="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400"
+                      aria-hidden="true"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="`0 0 20 16"
+                    >
+                      <path
+                        stroke="currentColor"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
+                      />
+                    </svg>
+                    <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
+                      <span className="font-semibold">Click to upload</span> or
+                      drag and drop
+                    </p>
+                    <p className="text-xs text-gray-500 dark:text-gray-400">
+                      SVG, PNG, JPG or GIF (MAX. 800x400px)
+                    </p>
+                  </div>
+                  <Controller
+                    name="userPhoto"
+                    control={control}
+                    render={({field}) => (
+                      <input
+                        {...field}
+                        onChange={handleFileChange}
+                        type="file"
+                        className="hidden"
+                        value={field.value || ""}
+                      />
+                    )}
+                  />
+                </label>
+              </div>
             )}
+            <Button
+              onClick={() => setSelectImage(null)}
+              disabled={selectImage ? false : true}
+              type="primary"
+              danger
+            >
+              DELETE PHOTO
+            </Button>
           </div>
           <div className="grid mt-5 grid-cols-2 gap-3 h-min w-full ml-5">
             <div className="w-full">
@@ -158,7 +188,23 @@ function AddData({isOpen}: {isOpen: boolean}) {
                 name="address"
                 control={control}
                 render={({field}) => (
-                  <Input {...field} className="h-10" size="large" />
+                  <Input
+                    {...field}
+                    className="h-10"
+                    size="large"
+                    onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                      const capitalizedValue =
+                        e.target.value.charAt(0).toUpperCase() +
+                        e.target.value.slice(1)
+                      field.onChange({
+                        ...e,
+                        target: {
+                          ...e.target,
+                          value: capitalizedValue,
+                        },
+                      })
+                    }}
+                  />
                 )}
               />
             </div>
@@ -201,7 +247,6 @@ function AddData({isOpen}: {isOpen: boolean}) {
                   <Input
                     {...field}
                     name="phone"
-                    pattern="[0-9]*"
                     addonBefore="+998"
                     size="large"
                   />

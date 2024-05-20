@@ -1,12 +1,32 @@
+type ISelectGroup =
+  | "Java"
+  | "Python"
+  | "Kotlin"
+  | "C++"
+  | "Scratch"
+  | "Literacy"
+  | "Android"
+  | "JavaScript"
+  | "Frontend"
+
+type TInputs = {
+  fullName: string
+  birthday: string
+  address: string
+  group: ISelectGroup[] | string
+  phone: string
+  userPhoto: string | null
+}
+
 interface IStudents {
   _id: string
   id: number
   fullName: string
   birthday: string
   address: string
-  group: string
+  group: ISelectGroup[] | string
   phone: string
-  userPhoto: string
+  userPhoto: string | null
   userPercentage: number
   createdAt: Date
   updatedAt?: Date
@@ -15,37 +35,25 @@ interface IStudents {
 interface ICategory {
   id: number
   image: string
-  language:
-    | "Java"
-    | "Python"
-    | "Kotlin"
-    | "C++"
-    | "Scratch"
-    | "Literacy"
-    | "Android"
-    | "JavaScript"
-    | "Frontend"
+  levelImage: string
+  language: ISelectGroup
 }
 
 interface IAds {
+  _id: string
   id: number
   image: string
+  title: string
+  createdAt: Date
+  updatedAt: Date
 }
+type Level = "free" | "begin" | "medium" | "advanced"
 
 interface ILessons {
   id: number
   lessonName: string
-  language:
-    | "Java"
-    | "Python"
-    | "Kotlin"
-    | "C++"
-    | "Scratch"
-    | "Literacy"
-    | "Android"
-    | "JavaScript"
-    | "Frontend"
-  title: string
+  languageName: string
   videoLink: string
-  level: "begin" | "free" | "advanced" | "medium"
+  level: string
+  homework: string
 }
