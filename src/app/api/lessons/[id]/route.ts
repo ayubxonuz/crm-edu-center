@@ -2,7 +2,7 @@ import connectMongoDB from "@/database/mongodb"
 import Lessons from "@/models/lessons"
 import {NextResponse} from "next/server"
 
-export const GET = async ({params}: {params: {id: string}}) => {
+export const GET = async (req: Request, {params}: {params: {id: string}}) => {
   try {
     await connectMongoDB()
     const lesson = await Lessons.findOne({_id: params.id})
