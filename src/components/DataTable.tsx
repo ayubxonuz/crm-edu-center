@@ -1,11 +1,9 @@
-import React from "react"
-import {Button, ConfigProvider, Modal, Space, Table, Tooltip} from "antd"
+import {Button, ConfigProvider, Space, Table, Tooltip} from "antd"
 import {PencilSquareIcon, XMarkIcon} from "@heroicons/react/24/outline"
 import {toggleEditStudentFunc} from "@/lib/features/toggle/toggleSlice"
 import {useDispatch} from "react-redux"
 import {setSingleStudentData} from "@/lib/features/student/studentSlice"
 import ModalPromise from "./ModalPromise"
-const {confirm} = Modal
 
 type TDataTable = {
   students: IStudents[]
@@ -57,16 +55,15 @@ function DataTable({loading, students}: TDataTable) {
             key="students"
             title="student"
             url={`students/${student._id}`}
-            children={
-              <Button
-                type="primary"
-                size="large"
-                shape="default"
-                danger
-                icon={<XMarkIcon width={24} height={24} />}
-              />
-            }
-          />
+          >
+            <Button
+              type="primary"
+              size="large"
+              shape="default"
+              danger
+              icon={<XMarkIcon width={24} height={24} />}
+            />
+          </ModalPromise>
           <Tooltip title="Edit">
             <Button
               onClick={() => {

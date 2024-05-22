@@ -5,7 +5,7 @@ import {
   DeleteOutlined,
   FileTextOutlined,
 } from "@ant-design/icons"
-import {Card, Empty, Popconfirm} from "antd"
+import {Card, Empty} from "antd"
 
 import Header from "@/components/Header"
 import Score from "@/components/Score"
@@ -39,12 +39,9 @@ function Ads() {
             style={{width: 300}}
             cover={<img className="h-[220px]" alt="ads photo" src={ad.image} />}
             actions={[
-              <ModalPromise
-                key="ads"
-                title="ad"
-                url={`ads/${ad._id}`}
-                children={<DeleteOutlined key="delete" />}
-              />,
+              <ModalPromise key="ads" title="ad" url={`ads/${ad._id}`}>
+                <DeleteOutlined key="delete" />
+              </ModalPromise>,
               <EditOutlined key="edit" />,
               <EllipsisOutlined key="ellipsis" />,
             ]}
