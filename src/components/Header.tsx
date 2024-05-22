@@ -26,8 +26,6 @@ function Header({text, buttonOne, buttonTwo}: THeader) {
   const {toggleFilterValue, toggleAddStudentValue} = useSelector(
     (store: RootState) => store.toggleSlice
   )
-  console.log(toggleAddStudentValue)
-
   return (
     <div className="w-full mt-5">
       <div className="flex justify-between">

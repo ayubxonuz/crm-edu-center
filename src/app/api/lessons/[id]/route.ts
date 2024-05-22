@@ -19,7 +19,7 @@ export const GET = async (req: Request, {params}: {params: {id: string}}) => {
 
 export const DELETE = async (req: Request) => {
   try {
-    const id = req.url.split("/lessons")[1]
+    const id = req.url.split("lessons/")[1]
     await connectMongoDB()
     await Lessons.findByIdAndDelete(id)
     return NextResponse.json({message: "OK"}, {status: 200})

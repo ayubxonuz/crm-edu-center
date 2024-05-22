@@ -3,20 +3,18 @@ import {Button, DatePicker, Input, Select, Space} from "antd"
 import {PlusIcon, XMarkIcon} from "@heroicons/react/24/outline"
 import {Controller, useForm} from "react-hook-form"
 import {useMutation, useQueryClient} from "@tanstack/react-query"
-import {customFetch, selectGroup} from "@/utils/utils"
+import {customFetch, formatPhoneNumber, selectGroup} from "@/utils/utils"
 import {toast} from "sonner"
 import {useDispatch, useSelector} from "react-redux"
 import {toggleEditStudentFunc} from "@/lib/features/toggle/toggleSlice"
 import dayjs from "dayjs"
 import {RootState} from "@/lib/store"
-import {ChangeEvent, useState} from "react"
+import {ChangeEvent, useEffect, useState} from "react"
 
 async function editStudent(data: IStudents) {
   try {
-    // toast.loading("Please wait, the students is being generated")
     const res = await customFetch.put(`students/${data._id}`, data)
     toast.success("Student edited successfully")
-    // toast.dismiss()
     return res.data
   } catch (error) {
     toast.error("Failed to edit student")
@@ -35,6 +33,12 @@ function EditStudent({isOpen}: {isOpen: boolean}) {
   const {singleStudentData} = useSelector(
     (store: RootState) => store.studentSlice
   )
+
+  useEffect(() => {
+    if (singleStudentData?.userPhoto) {
+      setSelectImage(singleStudentData.userPhoto)
+    }
+  }, [singleStudentData])
 
   const {mutateAsync, isPending} = useMutation({
     mutationFn: editStudent,
@@ -66,7 +70,15 @@ function EditStudent({isOpen}: {isOpen: boolean}) {
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     event.preventDefault()
     const file: File | undefined = event.target.files?.[0]
-    file && setSelectImage(URL.createObjectURL(file))
+    if (file) {
+      const reader = new FileReader()
+      reader.onloadend = () => {
+        if (reader.result) {
+          setSelectImage(reader.result as string)
+        }
+      }
+      reader.readAsDataURL(file)
+    }
   }
 
   return (
@@ -87,9 +99,9 @@ function EditStudent({isOpen}: {isOpen: boolean}) {
         </div>
         <form onSubmit={handleSubmit(onSubmit)} className="flex w-full">
           <div className="w-[500px] h-[400px] grid gap-y-2">
-            {singleStudentData?.userPhoto ? (
+            {selectImage ? (
               <img
-                src={singleStudentData.userPhoto}
+                src={selectImage}
                 alt="Selected File"
                 className="h-[370px] rounded-lg w-full object-cover"
               />
@@ -106,9 +118,9 @@ function EditStudent({isOpen}: {isOpen: boolean}) {
                     >
                       <path
                         stroke="currentColor"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
                         d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
                       />
                     </svg>
@@ -120,24 +132,17 @@ function EditStudent({isOpen}: {isOpen: boolean}) {
                       SVG, PNG, JPG or GIF (MAX. 800x400px)
                     </p>
                   </div>
-                  <Controller
-                    name="userPhoto"
-                    control={control}
-                    render={({field}) => (
-                      <input
-                        {...field}
-                        onChange={handleFileChange}
-                        type="file"
-                        className="hidden"
-                        value={field.value || ""}
-                      />
-                    )}
+                  <input
+                    onChange={handleFileChange}
+                    type="file"
+                    className="hidden"
                   />
                 </label>
               </div>
             )}
             <Button
-              disabled={singleStudentData?.userPhoto ? false : true}
+              onClick={() => setSelectImage(null)}
+              disabled={selectImage ? false : true}
               type="primary"
               danger
             >
@@ -263,6 +268,10 @@ function EditStudent({isOpen}: {isOpen: boolean}) {
                     name="phone"
                     addonBefore="+998"
                     size="large"
+                    onChange={(e) => {
+                      const formattedValue = formatPhoneNumber(e.target.value)
+                      field.onChange(formattedValue) // formatlangan qiymatni React Hook Form'ga yuboramiz
+                    }}
                   />
                 )}
               />

@@ -1,42 +1,54 @@
 import {customFetch} from "@/utils/utils"
-import {XMarkIcon} from "@heroicons/react/24/outline"
 import {useMutation, useQueryClient} from "@tanstack/react-query"
-import {Button, Tooltip, Modal} from "antd"
+import {Tooltip, Modal} from "antd"
 import {ExclamationCircleFilled} from "@ant-design/icons"
 import {toast} from "sonner"
+import {ReactNode} from "react"
 
 const {confirm} = Modal
 
-const ModalPromise = ({id}: {id: string}) => {
+type ModalPromiseType = {
+  children: ReactNode
+  key: string
+  url: string
+  title: string
+}
+
+const ModalPromise = ({children, key, title, url}: ModalPromiseType) => {
   const queryClient = useQueryClient()
 
-  const deleteStudent = async (studentId: string) => {
-    const res = await customFetch.delete(`students/${studentId}`)
+  const deleteStudent = async () => {
+    const res = await customFetch.delete(url)
     return res.data
   }
 
   const {mutateAsync} = useMutation({
     mutationFn: deleteStudent,
+    mutationKey: [key],
     onSuccess: () => {
-      queryClient.invalidateQueries({queryKey: ["students"]})
+      queryClient.invalidateQueries()
     },
   })
 
-  const showPromiseConfirm = (studentId: string) => {
+  const showPromiseConfirm = () => {
     confirm({
-      title: "Do you want to delete this student?",
+      title: `Do you want to delete this ${title}?`,
       icon: <ExclamationCircleFilled />,
       content: "If you delete this, it cannot be recovered!",
       onOk() {
         return new Promise<void>((resolve, reject) => {
-          mutateAsync(studentId)
+          mutateAsync()
             .then(() => {
               resolve()
-              toast.success("Student successfully deleted")
+              toast.success(
+                `${
+                  title[0].toUpperCase() + title.slice(1).toLowerCase()
+                } successfully deleted`
+              )
             })
             .catch((error: any) => {
               reject(error)
-              toast.error("Error deleting student: " + error.message)
+              toast.error(`Error deleting ${title}: ` + error.message)
             })
         })
       },
@@ -46,14 +58,7 @@ const ModalPromise = ({id}: {id: string}) => {
 
   return (
     <Tooltip title="Delete">
-      <Button
-        onClick={() => showPromiseConfirm(id)}
-        type="primary"
-        size="large"
-        shape="default"
-        danger
-        icon={<XMarkIcon width={24} height={24} />}
-      />
+      <div onClick={() => showPromiseConfirm()}>{children}</div>
     </Tooltip>
   )
 }

@@ -3,19 +3,22 @@ import {Button, DatePicker, Input, Select, Space} from "antd"
 import {PlusIcon, XMarkIcon} from "@heroicons/react/24/outline"
 import {Controller, useForm} from "react-hook-form"
 import {useMutation, useQueryClient} from "@tanstack/react-query"
-import {customFetch, generateRandomNumber, selectGroup} from "@/utils/utils"
+import {
+  customFetch,
+  formatPhoneNumber,
+  generateRandomNumber,
+  selectGroup,
+} from "@/utils/utils"
 import {toast} from "sonner"
 import {useDispatch} from "react-redux"
 import {toggleAddStudentFunc} from "@/lib/features/toggle/toggleSlice"
 import dayjs from "dayjs"
-import {ChangeEvent, useState} from "react"
+import {ChangeEvent, useRef, useState} from "react"
 
 async function addStudents(data: IStudents) {
   try {
-    // toast.loading("Please wait, the students is being generated")
     const res = await customFetch.post("students", data)
     toast.success("Student created successfully")
-    // toast.dismiss()
     return res.data
   } catch (error) {
     toast.error("Failed to create student")
@@ -27,10 +30,8 @@ async function addStudents(data: IStudents) {
 
 function AddData({isOpen}: {isOpen: boolean}) {
   const dispatch = useDispatch()
-  const [selectImage, setSelectImage] = useState<string | null>(null)
-
-  console.log(selectImage)
-
+  const fileUpload = useRef<HTMLInputElement>(null)
+  const [selectImage, setSelectImage] = useState<null | string>(null)
   const queryClient = useQueryClient()
   const {control, handleSubmit} = useForm<TInputs>()
 
@@ -42,25 +43,41 @@ function AddData({isOpen}: {isOpen: boolean}) {
     },
   })
 
-  const onSubmit = (studentsFormData: TInputs) => {
-    mutateAsync({
-      _id: "",
-      id: generateRandomNumber(),
-      fullName: studentsFormData.fullName,
-      birthday: dayjs(studentsFormData.birthday).format("MMM D, YYYY"),
-      address: studentsFormData.address,
-      group: studentsFormData?.group?.toString(),
-      phone: studentsFormData.phone ?? "",
-      userPercentage: 13,
-      userPhoto: selectImage ?? "",
-      createdAt: new Date(),
-    })
-  }
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     event.preventDefault()
     const file: File | undefined = event.target.files?.[0]
     if (file) {
-      setSelectImage(URL.createObjectURL(file))
+      const reader = new FileReader()
+      reader.onloadend = () => {
+        if (reader.result) {
+          setSelectImage(reader.result as string)
+        }
+      }
+      reader.readAsDataURL(file)
+    }
+  }
+
+  const onSubmit = (studentsFormData: TInputs) => {
+    const isEmpty = Object.values(studentsFormData).some(
+      (val) =>
+        val == null || val === "" || fileUpload.current?.files?.length == 0
+    )
+
+    if (isEmpty) {
+      return toast.error("Please fill out the form")
+    } else {
+      mutateAsync({
+        _id: "",
+        id: generateRandomNumber(),
+        fullName: studentsFormData.fullName,
+        birthday: dayjs(studentsFormData.birthday).format("MMM D, YYYY"),
+        address: studentsFormData.address,
+        group: studentsFormData?.group?.toString(),
+        phone: "+998 " + studentsFormData.phone ?? "",
+        userPercentage: 13,
+        userPhoto: selectImage,
+        createdAt: new Date(),
+      })
     }
   }
 
@@ -101,9 +118,9 @@ function AddData({isOpen}: {isOpen: boolean}) {
                     >
                       <path
                         stroke="currentColor"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
                         d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
                       />
                     </svg>
@@ -115,18 +132,11 @@ function AddData({isOpen}: {isOpen: boolean}) {
                       SVG, PNG, JPG or GIF (MAX. 800x400px)
                     </p>
                   </div>
-                  <Controller
-                    name="userPhoto"
-                    control={control}
-                    render={({field}) => (
-                      <input
-                        {...field}
-                        onChange={handleFileChange}
-                        type="file"
-                        className="hidden"
-                        value={field.value || ""}
-                      />
-                    )}
+                  <input
+                    ref={fileUpload}
+                    onChange={handleFileChange}
+                    type="file"
+                    className="hidden"
                   />
                 </label>
               </div>
@@ -249,6 +259,10 @@ function AddData({isOpen}: {isOpen: boolean}) {
                     name="phone"
                     addonBefore="+998"
                     size="large"
+                    onChange={(e) => {
+                      const formattedValue = formatPhoneNumber(e.target.value)
+                      field.onChange(formattedValue) // formatlangan qiymatni React Hook Form'ga yuboramiz
+                    }}
                   />
                 )}
               />

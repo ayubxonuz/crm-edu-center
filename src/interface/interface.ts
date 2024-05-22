@@ -15,7 +15,6 @@ type TInputs = {
   address: string
   group: ISelectGroup[] | string
   phone: string
-  userPhoto: string | null
 }
 
 interface IStudents {

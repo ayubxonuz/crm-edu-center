@@ -53,7 +53,20 @@ function DataTable({loading, students}: TDataTable) {
       key: "options",
       render: (student: IStudents) => (
         <Space size="small">
-          <ModalPromise id={student._id} />
+          <ModalPromise
+            key="students"
+            title="student"
+            url={`students/${student._id}`}
+            children={
+              <Button
+                type="primary"
+                size="large"
+                shape="default"
+                danger
+                icon={<XMarkIcon width={24} height={24} />}
+              />
+            }
+          />
           <Tooltip title="Edit">
             <Button
               onClick={() => {
