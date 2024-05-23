@@ -10,6 +10,7 @@ import {toggleEditStudentFunc} from "@/lib/features/toggle/toggleSlice"
 import dayjs from "dayjs"
 import {RootState} from "@/lib/store"
 import {ChangeEvent, useEffect, useState} from "react"
+import useFileChange from "@/hooks/useFileChange"
 
 async function editStudent(data: IStudents) {
   try {
@@ -25,7 +26,7 @@ async function editStudent(data: IStudents) {
 }
 
 function EditStudent({isOpen}: {isOpen: boolean}) {
-  const [selectImage, setSelectImage] = useState<string | null>(null)
+  const {handleFileChange, selectImage, setSelectImage} = useFileChange()
   const dispatch = useDispatch()
 
   const queryClient = useQueryClient()
@@ -65,20 +66,6 @@ function EditStudent({isOpen}: {isOpen: boolean}) {
           ? singleStudentData?.updatedAt
           : new Date(singleStudentData?.updatedAt ?? ""),
     })
-  }
-
-  const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
-    event.preventDefault()
-    const file: File | undefined = event.target.files?.[0]
-    if (file) {
-      const reader = new FileReader()
-      reader.onloadend = () => {
-        if (reader.result) {
-          setSelectImage(reader.result as string)
-        }
-      }
-      reader.readAsDataURL(file)
-    }
   }
 
   return (

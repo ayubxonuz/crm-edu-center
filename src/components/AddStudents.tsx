@@ -14,6 +14,7 @@ import {useDispatch} from "react-redux"
 import {toggleAddStudentFunc} from "@/lib/features/toggle/toggleSlice"
 import dayjs from "dayjs"
 import {ChangeEvent, useRef, useState} from "react"
+import useFileChange from "@/hooks/useFileChange"
 
 async function addStudents(data: IStudents) {
   try {
@@ -29,9 +30,9 @@ async function addStudents(data: IStudents) {
 }
 
 function AddData({isOpen}: {isOpen: boolean}) {
+  const {handleFileChange, selectImage, setSelectImage} = useFileChange()
   const dispatch = useDispatch()
   const fileUpload = useRef<HTMLInputElement>(null)
-  const [selectImage, setSelectImage] = useState<null | string>(null)
   const queryClient = useQueryClient()
   const {control, handleSubmit} = useForm<TInputs>()
 
@@ -42,20 +43,6 @@ function AddData({isOpen}: {isOpen: boolean}) {
       dispatch(toggleAddStudentFunc())
     },
   })
-
-  const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
-    event.preventDefault()
-    const file: File | undefined = event.target.files?.[0]
-    if (file) {
-      const reader = new FileReader()
-      reader.onloadend = () => {
-        if (reader.result) {
-          setSelectImage(reader.result as string)
-        }
-      }
-      reader.readAsDataURL(file)
-    }
-  }
 
   const onSubmit = (studentsFormData: TInputs) => {
     const isEmpty = Object.values(studentsFormData).some(

@@ -36,7 +36,7 @@ function Ads() {
           <Card
             key={ad._id}
             loading={isPending}
-            style={{width: 300}}
+            className="w-[100%]"
             cover={<img className="h-[220px]" alt="ads photo" src={ad.image} />}
             actions={[
               <ModalPromise key="ads" title="ad" url={`ads/${ad._id}`}>
