@@ -97,7 +97,7 @@ function AddData({isOpen}: {isOpen: boolean}) {
     >
       <div className="bg-white z-50 w-full mx-80 p-6 rounded-lg shadow-lg">
         <div className="flex justify-between">
-          <p className="mb-5">Yangi student qo'shish</p>
+          <p className="mb-5">Yangi student qo&apos;shish</p>
           <button
             onClick={() => dispatch(toggleAddStudentFunc())}
             className="bg-slate-100 hover:bg-slate-200 transition-all rounded-full justify-center flex items-center w-8 h-8"
@@ -155,7 +155,7 @@ function AddData({isOpen}: {isOpen: boolean}) {
               type="primary"
               danger
             >
-              RASMNI O'CHIRISH
+              RASMNI O&apos;CHIRISH
             </Button>
           </div>
           <div className="grid mt-5 grid-cols-2 gap-3 h-min w-full ml-5">
@@ -187,7 +187,7 @@ function AddData({isOpen}: {isOpen: boolean}) {
             </div>
             <div className="w-full">
               <h5 className="text-lg opacity-70 font-medium">
-                Tug'ilgan sana:
+                Tug&apos;ilgan sana:
               </h5>
               <Controller
                 name="birthday"

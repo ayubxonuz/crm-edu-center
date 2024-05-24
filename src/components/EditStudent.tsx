@@ -57,7 +57,11 @@ function EditStudent({isOpen}: {isOpen: boolean}) {
       birthday: dayjs(studentsFormData?.birthday).format("MMM D, YYYY"),
       address: studentsFormData.address ?? singleStudentData?.address,
       group: studentsFormData.group ?? singleStudentData?.group?.toString(),
-      phone: studentsFormData.phone ?? singleStudentData?.phone,
+      personalPhone:
+        studentsFormData.personalPhone ?? singleStudentData?.personalPhone,
+      homePhone: studentsFormData.homePhone,
+      certificate: studentsFormData.certificate,
+      graduated: studentsFormData.graduated,
       userPercentage: 13,
       userPhoto: selectImage,
       createdAt: singleStudentData?.createdAt ?? new Date(),
@@ -245,10 +249,10 @@ function EditStudent({isOpen}: {isOpen: boolean}) {
             <div className="w-full">
               <h5 className="text-lg opacity-70 font-medium">Phone number:</h5>
               <Controller
-                name="phone"
+                name="personalPhone"
                 control={control}
-                key={singleStudentData?.phone}
-                defaultValue={singleStudentData?.phone.slice(5)}
+                key={singleStudentData?.personalPhone}
+                defaultValue={singleStudentData?.personalPhone.slice(5)}
                 render={({field}) => (
                   <Input
                     {...field}
