@@ -33,7 +33,10 @@ export const PUT = async (req: Request, {params}: {params: {id: number}}) => {
     birthday,
     fullName,
     group,
-    phone,
+    personalPhone,
+    homePhone,
+    certificate,
+    graduated,
     userPercentage,
     userPhoto,
   }: IStudents = await req.json()
@@ -43,7 +46,10 @@ export const PUT = async (req: Request, {params}: {params: {id: number}}) => {
     birthday,
     fullName,
     group,
-    phone,
+    personalPhone,
+    homePhone,
+    certificate,
+    graduated,
     userPercentage,
     userPhoto,
   })

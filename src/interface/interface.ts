@@ -14,7 +14,10 @@ type TInputs = {
   birthday: string
   address: string
   group: ISelectGroup[] | string
-  phone: string
+  personalPhone: string
+  homePhone: string
+  certificate: string
+  graduated: string
 }
 
 interface IStudents {
@@ -24,7 +27,10 @@ interface IStudents {
   birthday: string
   address: string
   group: ISelectGroup[] | string
-  phone: string
+  personalPhone: string
+  homePhone: string
+  certificate: string
+  graduated: string
   userPhoto: string | null
   userPercentage: number
   createdAt: Date

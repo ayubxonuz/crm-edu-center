@@ -22,11 +22,14 @@ export const GET = async () => {
 }
 export const POST = async (req: Request) => {
   const {
-    address,
-    birthday,
     fullName,
+    birthday,
+    address,
     group,
-    phone,
+    personalPhone,
+    homePhone,
+    certificate,
+    graduated,
     userPercentage,
     userPhoto,
   }: IStudents = await req.json()
@@ -34,11 +37,14 @@ export const POST = async (req: Request) => {
     await connectMongoDB()
     await Students.create({
       id: generateRandomNumber(),
-      address,
-      birthday,
       fullName,
+      birthday,
+      address,
       group,
-      phone,
+      personalPhone,
+      homePhone,
+      certificate,
+      graduated,
       userPercentage,
       userPhoto,
     })

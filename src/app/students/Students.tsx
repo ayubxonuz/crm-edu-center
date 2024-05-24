@@ -5,7 +5,7 @@ import Header from "@/components/Header"
 import Score from "@/components/Score"
 import {toggleAddStudentFunc} from "@/lib/features/toggle/toggleSlice"
 import {customFetch} from "@/utils/utils"
-import {FunnelIcon, PlusIcon} from "@heroicons/react/24/outline"
+import {FunnelIcon} from "@heroicons/react/24/outline"
 import {useQuery} from "@tanstack/react-query"
 import {useDispatch} from "react-redux"
 function Students() {
@@ -32,9 +32,9 @@ function Students() {
         text="Students"
       />
       <div className="flex gap-x-5 mb-5">
-        <Score title="All Students" total={data?.length ?? 0} />
-        <Score title="Girls" total={131} />
-        <Score title="Boys" total={134} />
+        <Score title="Jami o'quvchilar" total={data?.length ?? 0} />
+        <Score title="Hozir o'qiyotganlar" total={131} />
+        <Score title="Bitirganlar" total={134} />
       </div>
       <FilterAndAddData />
       <DataTable loading={isPending} students={data ?? []} />

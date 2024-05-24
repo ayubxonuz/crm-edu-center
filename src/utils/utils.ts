@@ -109,3 +109,190 @@ export const selectGroup: SelectProps["options"] = [
     desc: "Literacy",
   },
 ]
+
+export const neighborhood = [
+  {
+    value: "Qiyali",
+    label: "Qiyali",
+  },
+  {
+    value: "Tumor",
+    label: "Tumor",
+  },
+  {
+    value: "Qum qiyali",
+    label: "Qum qiyali",
+  },
+  {
+    value: "Navbahor",
+    label: "Navbahor",
+  },
+  {
+    value: "Oqjar",
+    label: "Oqjar",
+  },
+  {
+    value: "Taptiqsaroy",
+    label: "Taptiqsaroy",
+  },
+  {
+    value: "Kapasaroy",
+    label: "Kapasaroy",
+  },
+  {
+    value: "Abdusamad",
+    label: "Abdusamad",
+  },
+  {
+    value: "Doimobod",
+    label: "Doimobod",
+  },
+  {
+    value: "Bog'ish",
+    label: "Bog'ish",
+  },
+  {
+    value: "Katta turk",
+    label: "Katta turk",
+  },
+  {
+    value: "Kichik turk",
+    label: "Kichik turk",
+  },
+  {
+    value: "Chinobod",
+    label: "Chinobod",
+  },
+  {
+    value: "Oltiqush",
+    label: "Oltiqush",
+  },
+  {
+    value: "Qora ko'rpa",
+    label: "Qora ko'rpa",
+  },
+  {
+    value: "Teliming",
+    label: "Teliming",
+  },
+  {
+    value: "Sanam",
+    label: "Sanam",
+  },
+  {
+    value: "Mang'it",
+    label: "Mang'it",
+  },
+  {
+    value: "Soyshildir",
+    label: "Soyshildir",
+  },
+  {
+    value: "Oqtepa",
+    label: "Oqtepa",
+  },
+  {
+    value: "Shopo'lat",
+    label: "Shopo'lat",
+  },
+  {
+    value: "G'umoyli",
+    label: "G'umoyli",
+  },
+  {
+    value: "Naymancha",
+    label: "Naymancha",
+  },
+  {
+    value: "Tangriqul",
+    label: "Tangriqul",
+  },
+  {
+    value: "Katta minglar",
+    label: "Katta minglar",
+  },
+  {
+    value: "Katta aravon",
+    label: "Katta aravon",
+  },
+  {
+    value: "Qashqar",
+    label: "Qashqar",
+  },
+  {
+    value: "Targ'ova",
+    label: "Targ'ova",
+  },
+  {
+    value: "Rahmatillo",
+    label: "Rahmatillo",
+  },
+  {
+    value: "Boybo'ta",
+    label: "Boybo'ta",
+  },
+  {
+    value: "Shodlik",
+    label: "Shodlik",
+  },
+  {
+    value: "Arziktepa",
+    label: "Arziktepa",
+  },
+  {
+    value: "Yangi zamon",
+    label: "Yangi zamon",
+  },
+  {
+    value: "Katta amirobod",
+    label: "Katta amirobod",
+  },
+  {
+    value: "Qizilmusht",
+    label: "Qizilmusht",
+  },
+  {
+    value: "Uvaysiy",
+    label: "Uvaysiy",
+  },
+  {
+    value: "Istiqlol",
+    label: "Istiqlol",
+  },
+  {
+    value: "Taypoq",
+    label: "Taypoq",
+  },
+  {
+    value: "Uymovut",
+    label: "Uymovut",
+  },
+  {
+    value: "Katta boybo'cha",
+    label: "Katta boybo'cha",
+  },
+  {
+    value: "Qiyali Qo'rg'oncha",
+    label: "Qiyali Qo'rg'oncha",
+  },
+  {
+    value: "Yashik",
+    label: "Yashik",
+  },
+  {
+    value: "Bo'riqum",
+    label: "Bo'riqum",
+  },
+  {
+    value: "Qoramulla",
+    label: "Qoramulla",
+  },
+  {
+    value: "Urganchi",
+    label: "Urganchi",
+  },
+  {
+    value: "Pishqaron",
+    label: "Pishqaron",
+  },
+]

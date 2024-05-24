@@ -3,11 +3,14 @@ import mongoose, {Schema} from "mongoose"
 const studentsSchema = new Schema(
   {
     id: Number,
-    address: String,
-    birthday: String,
     fullName: String,
+    birthday: String,
+    address: String,
     group: String,
-    phone: String,
+    personalPhone: String,
+    homePhone: String,
+    certificate: String,
+    graduated: String,
     userPercentage: Number,
     userPhoto: String,
   },

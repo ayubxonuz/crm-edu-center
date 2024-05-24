@@ -31,7 +31,7 @@ function Ads() {
         <Score title="lorem" total={131} />
         <Score title="lorem" total={134} />
       </div>
-      <div className="grid grid-cols-5 justify-self-start items-center mb-10 gap-5">
+      <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5 mb-10">
         {ads?.map((ad) => (
           <Card
             key={ad._id}

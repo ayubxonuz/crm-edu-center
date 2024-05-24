@@ -7,6 +7,7 @@ import {
   customFetch,
   formatPhoneNumber,
   generateRandomNumber,
+  neighborhood,
   selectGroup,
 } from "@/utils/utils"
 import {toast} from "sonner"
@@ -15,6 +16,9 @@ import {toggleAddStudentFunc} from "@/lib/features/toggle/toggleSlice"
 import dayjs from "dayjs"
 import {ChangeEvent, useRef, useState} from "react"
 import useFileChange from "@/hooks/useFileChange"
+import SelectUI from "./antdUI/SelectUI"
+import PhoneInput from "./antdUI/PhoneInput"
+import Btn from "./antdUI/Btn"
 
 async function addStudents(data: IStudents) {
   try {
@@ -60,13 +64,30 @@ function AddData({isOpen}: {isOpen: boolean}) {
         birthday: dayjs(studentsFormData.birthday).format("MMM D, YYYY"),
         address: studentsFormData.address,
         group: studentsFormData?.group?.toString(),
-        phone: "+998 " + studentsFormData.phone ?? "",
+        personalPhone: "+998 " + studentsFormData.personalPhone,
+        homePhone: "+998 " + studentsFormData.homePhone,
+        certificate: studentsFormData.certificate,
+        graduated: studentsFormData.graduated,
         userPercentage: 13,
         userPhoto: selectImage,
         createdAt: new Date(),
       })
     }
+    console.log(studentsFormData)
   }
+
+  const onChange = (value: string) => {
+    console.log(`selected ${value}`)
+  }
+
+  const onSearch = (value: string) => {
+    console.log("search:", value)
+  }
+
+  const filterOption = (
+    input: string,
+    option?: {label: string; value: string}
+  ) => (option?.label ?? "").toLowerCase().includes(input.toLowerCase())
 
   return (
     <div
@@ -76,7 +97,7 @@ function AddData({isOpen}: {isOpen: boolean}) {
     >
       <div className="bg-white z-50 w-full mx-80 p-6 rounded-lg shadow-lg">
         <div className="flex justify-between">
-          <p className="mb-5">Add new student</p>
+          <p className="mb-5">Yangi student qo'shish</p>
           <button
             onClick={() => dispatch(toggleAddStudentFunc())}
             className="bg-slate-100 hover:bg-slate-200 transition-all rounded-full justify-center flex items-center w-8 h-8"
@@ -134,12 +155,12 @@ function AddData({isOpen}: {isOpen: boolean}) {
               type="primary"
               danger
             >
-              DELETE PHOTO
+              RASMNI O'CHIRISH
             </Button>
           </div>
           <div className="grid mt-5 grid-cols-2 gap-3 h-min w-full ml-5">
             <div className="w-full">
-              <h5 className="text-lg opacity-70 font-medium">Fullname:</h5>
+              <h5 className="text-lg opacity-70 font-medium">Ism familya:</h5>
               <Controller
                 control={control}
                 name="fullName"
@@ -165,7 +186,9 @@ function AddData({isOpen}: {isOpen: boolean}) {
               />
             </div>
             <div className="w-full">
-              <h5 className="text-lg opacity-70 font-medium">Birthday:</h5>
+              <h5 className="text-lg opacity-70 font-medium">
+                Tug'ilgan sana:
+              </h5>
               <Controller
                 name="birthday"
                 control={control}
@@ -180,33 +203,25 @@ function AddData({isOpen}: {isOpen: boolean}) {
               />
             </div>
             <div className="w-full">
-              <h5 className="text-lg opacity-70 font-medium">Address:</h5>
+              <h5 className="text-lg opacity-70 font-medium">Manzil:</h5>
               <Controller
                 name="address"
                 control={control}
                 render={({field}) => (
-                  <Input
-                    {...field}
-                    className="h-10"
-                    size="large"
-                    onChange={(e: ChangeEvent<HTMLInputElement>) => {
-                      const capitalizedValue =
-                        e.target.value.charAt(0).toUpperCase() +
-                        e.target.value.slice(1)
-                      field.onChange({
-                        ...e,
-                        target: {
-                          ...e.target,
-                          value: capitalizedValue,
-                        },
-                      })
+                  <SelectUI
+                    filterOption={filterOption}
+                    onChange={(value) => {
+                      field.onChange(value)
+                      onChange(value)
                     }}
+                    onSearch={onSearch}
+                    options={neighborhood}
                   />
                 )}
               />
             </div>
             <div className="w-full">
-              <h5 className="text-lg opacity-70 font-medium">Group:</h5>
+              <h5 className="text-lg opacity-70 font-medium">Guruh:</h5>
               <Controller
                 name="group"
                 control={control}
@@ -214,9 +229,7 @@ function AddData({isOpen}: {isOpen: boolean}) {
                   <Select
                     {...field}
                     size="large"
-                    maxCount={1}
                     className="h-10 w-full"
-                    mode="multiple"
                     options={selectGroup}
                     optionRender={(option) => (
                       <Space>
@@ -236,35 +249,76 @@ function AddData({isOpen}: {isOpen: boolean}) {
               />
             </div>
             <div className="w-full">
-              <h5 className="text-lg opacity-70 font-medium">Phone number:</h5>
+              <PhoneInput
+                controlName="personalPhone"
+                label="Shaxsiy"
+                control={control}
+              />
+            </div>
+            <div className="w-full">
+              <PhoneInput
+                controlName="homePhone"
+                label="Uy"
+                control={control}
+              />
+            </div>
+            <div className="w-full">
+              <h5 className="text-lg opacity-70 font-medium">Sertifikat:</h5>
               <Controller
-                name="phone"
+                name="certificate"
                 control={control}
                 render={({field}) => (
-                  <Input
+                  <SelectUI
                     {...field}
-                    name="phone"
-                    addonBefore="+998"
-                    size="large"
-                    onChange={(e) => {
-                      const formattedValue = formatPhoneNumber(e.target.value)
-                      field.onChange(formattedValue) // formatlangan qiymatni React Hook Form'ga yuboramiz
+                    options={[
+                      {
+                        value: "yes",
+                        label: "Berilgan ✅",
+                      },
+                      {
+                        value: "no",
+                        label: "Berilmagan ❌",
+                      },
+                    ]}
+                    onChange={(value) => {
+                      field.onChange(value)
+                      onChange(value)
                     }}
                   />
                 )}
               />
             </div>
+            <div className="w-full">
+              <h5 className="text-lg opacity-70 font-medium">Bitirgan:</h5>
+              <Controller
+                name="graduated"
+                control={control}
+                render={({field}) => (
+                  <SelectUI
+                    {...field}
+                    options={[
+                      {
+                        value: "yes",
+                        label: "Bitirgan ✅",
+                      },
+                      {
+                        value: "no",
+                        label: "Bitirmagan ❌",
+                      },
+                    ]}
+                    onChange={(value) => {
+                      field.onChange(value)
+                      onChange(value)
+                    }}
+                  />
+                )}
+              />
+            </div>
+
             <div className="w-full items-end flex">
-              <Button
-                loading={isPending}
-                htmlType="submit"
-                type="primary"
-                size="large"
-                className="flex items-center"
-                icon={<PlusIcon width={21} height={21} />}
-              >
-                SUBMIT
-              </Button>
+              <Btn htmlType="submit" loading={isPending}>
+                QO'SHISH
+              </Btn>
             </div>
           </div>
         </form>
