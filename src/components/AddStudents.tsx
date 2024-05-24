@@ -317,7 +317,7 @@ function AddData({isOpen}: {isOpen: boolean}) {
 
             <div className="w-full items-end flex">
               <Btn htmlType="submit" loading={isPending}>
-                QO'SHISH
+                QO&apos;SHISH
               </Btn>
             </div>
           </div>
