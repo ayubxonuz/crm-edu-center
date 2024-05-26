@@ -1,9 +1,16 @@
 "use client"
-import {Button, DatePicker, Input, Select, Space} from "antd"
-import {PlusIcon, XMarkIcon} from "@heroicons/react/24/outline"
+import {DatePicker, Input, Select, Space} from "antd"
+import {XMarkIcon} from "@heroicons/react/24/outline"
 import {Controller, useForm} from "react-hook-form"
 import {useMutation, useQueryClient} from "@tanstack/react-query"
-import {customFetch, formatPhoneNumber, selectGroup} from "@/utils/utils"
+import {
+  customFetch,
+  filterOptionSelect,
+  neighborhood,
+  onChangeSelect,
+  onSearchSelect,
+  selectGroup,
+} from "@/utils/utils"
 import {toast} from "sonner"
 import {useDispatch, useSelector} from "react-redux"
 import {toggleEditStudentFunc} from "@/lib/features/toggle/toggleSlice"
@@ -11,6 +18,9 @@ import dayjs from "dayjs"
 import {RootState} from "@/lib/store"
 import {ChangeEvent, useEffect, useState} from "react"
 import useFileChange from "@/hooks/useFileChange"
+import Btn from "./antdUI/Btn"
+import SelectUI from "./antdUI/SelectUI"
+import PhoneInput from "./antdUI/PhoneInput"
 
 async function editStudent(data: IStudents) {
   try {
@@ -131,14 +141,14 @@ function EditStudent({isOpen}: {isOpen: boolean}) {
                 </label>
               </div>
             )}
-            <Button
-              onClick={() => setSelectImage(null)}
+            <Btn
               disabled={selectImage ? false : true}
-              type="primary"
+              click={() => setSelectImage(null)}
               danger
+              size="middle"
             >
-              DELETE PHOTO
-            </Button>
+              RASMNI O&apos;CHIRISH
+            </Btn>
           </div>
           <div className="grid mt-5 grid-cols-2 gap-3 h-min w-full ml-5">
             <div className="w-full">
@@ -192,23 +202,16 @@ function EditStudent({isOpen}: {isOpen: boolean}) {
                 name="address"
                 control={control}
                 key={singleStudentData?.address}
-                defaultValue={singleStudentData?.address}
                 render={({field}) => (
-                  <Input
+                  <SelectUI
+                    defaultValue={singleStudentData?.address}
                     {...field}
-                    className="h-10"
-                    size="large"
-                    onChange={(e: ChangeEvent<HTMLInputElement>) => {
-                      const capitalizedValue =
-                        e.target.value.charAt(0).toUpperCase() +
-                        e.target.value.slice(1)
-                      field.onChange({
-                        ...e,
-                        target: {
-                          ...e.target,
-                          value: capitalizedValue,
-                        },
-                      })
+                    options={neighborhood}
+                    filterOption={filterOptionSelect}
+                    onSearch={onSearchSelect}
+                    onChange={(value) => {
+                      field.onChange(value)
+                      onChangeSelect(value)
                     }}
                   />
                 )}
@@ -225,9 +228,7 @@ function EditStudent({isOpen}: {isOpen: boolean}) {
                   <Select
                     {...field}
                     size="large"
-                    maxCount={1}
                     className="h-10 w-full"
-                    mode="multiple"
                     options={selectGroup}
                     optionRender={(option) => (
                       <Space>
@@ -247,37 +248,81 @@ function EditStudent({isOpen}: {isOpen: boolean}) {
               />
             </div>
             <div className="w-full">
-              <h5 className="text-lg opacity-70 font-medium">Phone number:</h5>
-              <Controller
-                name="personalPhone"
-                control={control}
-                key={singleStudentData?.personalPhone}
+              <PhoneInput
                 defaultValue={singleStudentData?.personalPhone.slice(5)}
+                control={control}
+                controlName="personalPhone"
+                label="Shaxsiy"
+              />
+            </div>
+            <div className="w-full">
+              <PhoneInput
+                defaultValue={singleStudentData?.homePhone.slice(5)}
+                control={control}
+                controlName="homePhone"
+                label="Uy"
+              />
+            </div>
+            <div className="w-full">
+              <h5 className="text-lg opacity-70 font-medium">Sertifikat:</h5>
+              <Controller
+                name="certificate"
+                key={singleStudentData?.certificate}
+                control={control}
                 render={({field}) => (
-                  <Input
+                  <SelectUI
+                    defaultValue={singleStudentData?.certificate}
                     {...field}
-                    name="phone"
-                    addonBefore="+998"
-                    size="large"
-                    onChange={(e) => {
-                      const formattedValue = formatPhoneNumber(e.target.value)
-                      field.onChange(formattedValue) // formatlangan qiymatni React Hook Form'ga yuboramiz
+                    options={[
+                      {
+                        value: "yes",
+                        label: "Berilgan ✅",
+                      },
+                      {
+                        value: "no",
+                        label: "Berilmagan ❌",
+                      },
+                    ]}
+                    onChange={(value) => {
+                      field.onChange(value)
+                      onChangeSelect(value)
+                    }}
+                  />
+                )}
+              />
+            </div>
+            <div className="w-full">
+              <h5 className="text-lg opacity-70 font-medium">Bitirgan:</h5>
+              <Controller
+                name="graduated"
+                control={control}
+                key={singleStudentData?.graduated}
+                render={({field}) => (
+                  <SelectUI
+                    defaultValue={singleStudentData?.graduated}
+                    {...field}
+                    options={[
+                      {
+                        value: "yes",
+                        label: "Bitirgan ✅",
+                      },
+                      {
+                        value: "no",
+                        label: "Bitirmagan ❌",
+                      },
+                    ]}
+                    onChange={(value) => {
+                      field.onChange(value)
+                      onChangeSelect(value)
                     }}
                   />
                 )}
               />
             </div>
             <div className="w-full items-end flex">
-              <Button
-                loading={isPending}
-                htmlType="submit"
-                type="primary"
-                size="large"
-                className="flex items-center"
-                icon={<PlusIcon width={21} height={21} />}
-              >
-                EDIT
-              </Button>
+              <Btn htmlType="submit" icon="edit" loading={isPending}>
+                TAHRIRLASH
+              </Btn>
             </div>
           </div>
         </form>

@@ -59,6 +59,20 @@ export const formatPhoneNumber = (value: string) => {
   )} ${cleaned.slice(7, 9)}`
 }
 
+export const onChangeSelect = (value: string) => {
+  console.log(`selected ${value}`)
+}
+
+export const onSearchSelect = (value: string) => {
+  console.log("search:", value)
+}
+
+export const filterOptionSelect = (
+  input: string,
+  option?: {label: string; value: string}
+) => (option?.label ?? "").toLowerCase().includes(input.toLowerCase())
+
+
 export const selectGroup: SelectProps["options"] = [
   {
     label: "Kotlin",

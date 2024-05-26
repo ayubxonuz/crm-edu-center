@@ -62,3 +62,15 @@ interface ILessons {
   level: string
   homework: string
 }
+
+interface IQuestions {
+  id: number
+  question: string
+  language: ISelectGroup
+  level: string
+  a: string
+  b: string
+  c: string
+  d: string
+  right: string
+}

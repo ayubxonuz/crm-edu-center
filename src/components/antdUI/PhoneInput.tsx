@@ -6,19 +6,27 @@ type PhoneInputType = {
   controlName: keyof TInputs
   label: string
   control: Control<TInputs, any>
+  defaultValue?: string
 }
 
-function PhoneInput({control, controlName, label}: PhoneInputType) {
+function PhoneInput({
+  control,
+  defaultValue,
+  controlName,
+  label,
+}: PhoneInputType) {
   return (
     <>
       <h5 className="text-lg opacity-70 font-medium">{label} raqam:</h5>
       <Controller
+        key={defaultValue}
         name={controlName}
         control={control}
         render={({field}) => (
           <Input
             {...field}
             name="phone"
+            defaultValue={defaultValue}
             addonBefore="+998"
             size="large"
             onChange={(e) => {

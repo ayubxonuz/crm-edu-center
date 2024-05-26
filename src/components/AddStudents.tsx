@@ -1,20 +1,22 @@
 "use client"
-import {Button, DatePicker, Input, Select, Space} from "antd"
-import {PlusIcon, XMarkIcon} from "@heroicons/react/24/outline"
+import {DatePicker, Input, Select, Space} from "antd"
+import {XMarkIcon} from "@heroicons/react/24/outline"
 import {Controller, useForm} from "react-hook-form"
 import {useMutation, useQueryClient} from "@tanstack/react-query"
 import {
   customFetch,
-  formatPhoneNumber,
+  filterOptionSelect,
   generateRandomNumber,
   neighborhood,
+  onChangeSelect,
+  onSearchSelect,
   selectGroup,
 } from "@/utils/utils"
 import {toast} from "sonner"
 import {useDispatch} from "react-redux"
 import {toggleAddStudentFunc} from "@/lib/features/toggle/toggleSlice"
 import dayjs from "dayjs"
-import {ChangeEvent, useRef, useState} from "react"
+import {ChangeEvent, useRef} from "react"
 import useFileChange from "@/hooks/useFileChange"
 import SelectUI from "./antdUI/SelectUI"
 import PhoneInput from "./antdUI/PhoneInput"
@@ -71,23 +73,10 @@ function AddData({isOpen}: {isOpen: boolean}) {
         userPercentage: 13,
         userPhoto: selectImage,
         createdAt: new Date(),
-      })
+      }).then(() => {})
     }
     console.log(studentsFormData)
   }
-
-  const onChange = (value: string) => {
-    console.log(`selected ${value}`)
-  }
-
-  const onSearch = (value: string) => {
-    console.log("search:", value)
-  }
-
-  const filterOption = (
-    input: string,
-    option?: {label: string; value: string}
-  ) => (option?.label ?? "").toLowerCase().includes(input.toLowerCase())
 
   return (
     <div
@@ -95,7 +84,7 @@ function AddData({isOpen}: {isOpen: boolean}) {
         isOpen ? "opacity-100" : "opacity-0 pointer-events-none"
       }`}
     >
-      <div className="bg-white z-50 w-full mx-80 p-6 rounded-lg shadow-lg">
+      <div className="bg-white z-50 w-full mx-[17%] p-6 rounded-lg shadow-lg">
         <div className="flex justify-between">
           <p className="mb-5">Yangi student qo&apos;shish</p>
           <button
@@ -149,14 +138,14 @@ function AddData({isOpen}: {isOpen: boolean}) {
                 </label>
               </div>
             )}
-            <Button
-              onClick={() => setSelectImage(null)}
+            <Btn
+              click={() => setSelectImage(null)}
               disabled={selectImage ? false : true}
-              type="primary"
+              size="middle"
               danger
             >
               RASMNI O&apos;CHIRISH
-            </Button>
+            </Btn>
           </div>
           <div className="grid mt-5 grid-cols-2 gap-3 h-min w-full ml-5">
             <div className="w-full">
@@ -194,9 +183,9 @@ function AddData({isOpen}: {isOpen: boolean}) {
                 control={control}
                 render={({field}) => (
                   <DatePicker
+                    {...field}
                     placeholder=""
                     className="w-full h-10"
-                    {...field}
                     size="large"
                   />
                 )}
@@ -209,12 +198,12 @@ function AddData({isOpen}: {isOpen: boolean}) {
                 control={control}
                 render={({field}) => (
                   <SelectUI
-                    filterOption={filterOption}
+                    filterOption={filterOptionSelect}
                     onChange={(value) => {
                       field.onChange(value)
-                      onChange(value)
+                      onChangeSelect(value)
                     }}
-                    onSearch={onSearch}
+                    onSearch={onSearchSelect}
                     options={neighborhood}
                   />
                 )}
@@ -282,7 +271,7 @@ function AddData({isOpen}: {isOpen: boolean}) {
                     ]}
                     onChange={(value) => {
                       field.onChange(value)
-                      onChange(value)
+                      onChangeSelect(value)
                     }}
                   />
                 )}
@@ -308,7 +297,7 @@ function AddData({isOpen}: {isOpen: boolean}) {
                     ]}
                     onChange={(value) => {
                       field.onChange(value)
-                      onChange(value)
+                      onChangeSelect(value)
                     }}
                   />
                 )}

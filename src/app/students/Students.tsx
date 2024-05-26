@@ -5,7 +5,13 @@ import Header from "@/components/Header"
 import Score from "@/components/Score"
 import {toggleAddStudentFunc} from "@/lib/features/toggle/toggleSlice"
 import {customFetch} from "@/utils/utils"
-import {FunnelIcon} from "@heroicons/react/24/outline"
+import {
+  ArchiveBoxArrowDownIcon,
+  ArrowTrendingDownIcon,
+  ClipboardDocumentCheckIcon,
+  FunnelIcon,
+  UserGroupIcon,
+} from "@heroicons/react/24/outline"
 import {useQuery} from "@tanstack/react-query"
 import {useDispatch} from "react-redux"
 function Students() {
@@ -17,6 +23,12 @@ function Students() {
       return students.data
     },
   })
+
+  const graduatedLength =
+    data?.filter((item) => item.graduated === "yes").length ?? 0
+
+  const noGraduatedLength =
+    data?.filter((item) => item.graduated == "no").length ?? 0
 
   return (
     <main className="grid gap-y-5">
@@ -31,10 +43,27 @@ function Students() {
         }}
         text="Students"
       />
-      <div className="flex gap-x-5 mb-5">
-        <Score title="Jami o'quvchilar" total={data?.length ?? 0} />
-        <Score title="Hozir o'qiyotganlar" total={131} />
-        <Score title="Bitirganlar" total={134} />
+      <div className="grid grid-cols-4 max-[1900px]:grid-cols-3 gap-5 mb-5">
+        <Score
+          icon={<ClipboardDocumentCheckIcon width={20} height={20} />}
+          title="Jami o'quvchilar"
+          total={data?.length ?? 0}
+        />
+        <Score
+          icon={<ArrowTrendingDownIcon width={20} height={20} />}
+          title="Hozir o'qiyotganlar"
+          total={noGraduatedLength}
+        />
+        <Score
+          icon={<ArchiveBoxArrowDownIcon width={20} height={20} />}
+          title="Bitirganlar"
+          total={graduatedLength}
+        />
+        <Score
+          icon={<UserGroupIcon width={20} height={20} />}
+          title="Ustozlar"
+          total={13}
+        />
       </div>
       <FilterAndAddData />
       <DataTable loading={isPending} students={data ?? []} />

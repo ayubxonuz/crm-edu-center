@@ -42,8 +42,8 @@ function DataTable({loading, students}: TDataTable) {
     },
     {
       title: "Phone",
-      dataIndex: "phone",
-      key: "phone",
+      dataIndex: "personalPhone",
+      key: "personalPhone",
     },
     {
       title: "Options",

@@ -1,24 +1,32 @@
 import {Select} from "antd"
 
-type SelectType = {
-  onChange: (value: string) => void
+type SelectUIType = {
+  onChange: (value: any) => void
+  defaultValue?: string
   onSearch?: (value: string) => void
   filterOption?: (
     input: string,
     option?: {
       label: string
-      value: string
+      value: "yes" | "no" | string
     }
   ) => boolean
   options: {
-    value: string
+    value: "yes" | "no" | string
     label: string
   }[]
 }
 
-function SelectUI({filterOption, onChange, onSearch, options}: SelectType) {
+function SelectUI({
+  filterOption,
+  defaultValue,
+  onChange,
+  onSearch,
+  options,
+}: SelectUIType) {
   return (
     <Select
+      defaultValue={defaultValue}
       showSearch
       size="large"
       className="h-10 w-full"

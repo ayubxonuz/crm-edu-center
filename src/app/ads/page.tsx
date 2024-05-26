@@ -12,6 +12,11 @@ import Score from "@/components/Score"
 import {useQuery} from "@tanstack/react-query"
 import {customFetch} from "@/utils/utils"
 import ModalPromise from "@/components/ModalPromise"
+import {
+  ArchiveBoxArrowDownIcon,
+  ArrowTrendingDownIcon,
+  ClipboardDocumentCheckIcon,
+} from "@heroicons/react/24/outline"
 const {Meta} = Card
 
 function Ads() {
@@ -26,10 +31,22 @@ function Ads() {
   return (
     <main className="grid gap-y-5">
       <Header buttonTwo={{text: "ADD ADS", click: () => 1}} text="ADS" />
-      <div className="grid grid-cols-3 justify-self-start gap-5 mb-5">
-        <Score title="All ads" total={ads?.length ?? 0} />
-        <Score title="lorem" total={131} />
-        <Score title="lorem" total={134} />
+      <div className="grid grid-cols-4 justify-self-start gap-5 mb-5 w-full">
+        <Score
+          icon={<ClipboardDocumentCheckIcon width={20} height={20} />}
+          title="All ads"
+          total={ads?.length ?? 0}
+        />
+        <Score
+          icon={<ArrowTrendingDownIcon width={20} height={20} />}
+          title="lorem"
+          total={131}
+        />
+        <Score
+          icon={<ArchiveBoxArrowDownIcon width={20} height={20} />}
+          title="lorem"
+          total={134}
+        />
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5 mb-10">
         {ads?.map((ad) => (
