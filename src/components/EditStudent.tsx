@@ -59,6 +59,8 @@ function EditStudent({isOpen}: {isOpen: boolean}) {
     },
   })
 
+  console.log(singleStudentData)
+
   const onSubmit = (studentsFormData: TInputs) => {
     mutateAsync({
       _id: singleStudentData?._id ?? "",
@@ -267,11 +269,19 @@ function EditStudent({isOpen}: {isOpen: boolean}) {
               <h5 className="text-lg opacity-70 font-medium">Sertifikat:</h5>
               <Controller
                 name="certificate"
-                key={singleStudentData?.certificate}
+                key={
+                  singleStudentData?.certificate
+                    ? "Berilgan ✅"
+                    : "Berilmagan ❌"
+                }
                 control={control}
                 render={({field}) => (
                   <SelectUI
-                    defaultValue={singleStudentData?.certificate}
+                    defaultValue={
+                      singleStudentData?.certificate
+                        ? "Berilgan ✅"
+                        : "Berilmagan ❌"
+                    }
                     {...field}
                     options={[
                       {
@@ -296,10 +306,16 @@ function EditStudent({isOpen}: {isOpen: boolean}) {
               <Controller
                 name="graduated"
                 control={control}
-                key={singleStudentData?.graduated}
+                key={
+                  singleStudentData?.graduated ? "Bitirgan ✅" : "Bitirmagan ❌"
+                }
                 render={({field}) => (
                   <SelectUI
-                    defaultValue={singleStudentData?.graduated}
+                    defaultValue={
+                      singleStudentData?.graduated
+                        ? "Bitirgan ✅"
+                        : "Bitirmagan ❌"
+                    }
                     {...field}
                     options={[
                       {

@@ -18,6 +18,104 @@ import {
 import Link from "next/link"
 
 function SideNavbar() {
+  const sideBarLinks = [
+    {
+      id: 1,
+      name: "O'quvchilar",
+      link: "/",
+      chilren: (
+        <UserGroupIcon
+          className="text-2xl text-[#DBE2EF] group-hover:text-white"
+          width={24}
+          height={24}
+        />
+      ),
+    },
+    {
+      id: 2,
+      name: "Kurslar",
+      link: "/courses",
+      chilren: (
+        <FolderPlusIcon
+          className="text-2xl text-[#DBE2EF] group-hover:text-white"
+          width={24}
+          height={24}
+        />
+      ),
+    },
+    {
+      id: 3,
+      name: "Darslar",
+      link: "/lessons",
+      chilren: (
+        <PlayIcon
+          className="text-2xl text-[#DBE2EF] group-hover:text-white"
+          width={24}
+          height={24}
+        />
+      ),
+    },
+    {
+      id: 4,
+      name: "Reklama",
+      link: "/ads",
+      chilren: (
+        <PhotoIcon
+          className="text-2xl text-[#DBE2EF] group-hover:text-white"
+          width={24}
+          height={24}
+        />
+      ),
+    },
+    {
+      id: 5,
+      name: "Hiosob",
+      link: "/profile",
+      chilren: (
+        <UserCircleIcon
+          className="text-2xl text-[#DBE2EF] group-hover:text-white"
+          width={24}
+          height={24}
+        />
+      ),
+    },
+    {
+      id: 6,
+      name: "Sharhlar",
+      link: "/comments",
+      chilren: (
+        <ChatBubbleLeftEllipsisIcon
+          className="text-2xl text-[#DBE2EF] group-hover:text-white"
+          width={24}
+          height={24}
+        />
+      ),
+    },
+    {
+      id: 7,
+      name: "Analytics",
+      link: "/analytics",
+      chilren: (
+        <ChartBarSquareIcon
+          className="text-2xl text-[#DBE2EF] group-hover:text-white"
+          width={24}
+          height={24}
+        />
+      ),
+    },
+    {
+      id: 8,
+      name: "Habarlar",
+      link: "/messages",
+      chilren: (
+        <ChatBubbleOvalLeftEllipsisIcon
+          className="text-2xl text-[#DBE2EF] group-hover:text-white"
+          width={24}
+          height={24}
+        />
+      ),
+    },
+  ]
   return (
     <div>
       <Disclosure className="select-none" as="nav">
@@ -33,107 +131,18 @@ function SideNavbar() {
               IT-CENTER-ADMIN-PANEL
             </Link>
             <div className=" my-4 border-b border-gray-100 pb-4">
-              <Link
-                href="/"
-                className="flex transition-all mb-2 justify-start items-center gap-4 pl-5 hover:bg-[#3F72AF] p-2 rounded-md group cursor-pointer hover:shadow-lg m-auto"
-              >
-                <UserGroupIcon
-                  width={24}
-                  height={24}
-                  className="text-2xl text-[#DBE2EF] group-hover:text-white "
-                />
-                <h3 className="text-base text-[#DBE2EF] group-hover:text-white font-semibold ">
-                  Students
-                </h3>
-              </Link>
-              <Link
-                href="/courses"
-                className="flex transition-all mb-2 justify-start items-center gap-4 pl-5 hover:bg-[#3F72AF] p-2 rounded-md group cursor-pointer hover:shadow-lg m-auto"
-              >
-                <FolderPlusIcon
-                  width={24}
-                  height={24}
-                  className="text-2xl text-[#DBE2EF] group-hover:text-white "
-                />
-                <h3 className="text-base text-[#DBE2EF] group-hover:text-white font-semibold ">
-                  Courses
-                </h3>
-              </Link>
-              <Link
-                href="/lessons"
-                className="flex transition-all mb-2 justify-start items-center gap-4 pl-5 hover:bg-[#3F72AF] p-2 rounded-md group cursor-pointer hover:shadow-lg m-auto"
-              >
-                <PlayIcon
-                  width={24}
-                  height={24}
-                  className="text-2xl text-[#DBE2EF] group-hover:text-white "
-                />
-                <h3 className="text-base text-[#DBE2EF] group-hover:text-white font-semibold ">
-                  Lessons
-                </h3>
-              </Link>
-              <Link
-                href="/ads"
-                className="flex transition-all mb-2 justify-start items-center gap-4 pl-5 hover:bg-[#3F72AF] p-2 rounded-md group cursor-pointer hover:shadow-lg m-auto"
-              >
-                <PhotoIcon
-                  width={24}
-                  height={24}
-                  className="text-2xl text-[#DBE2EF] group-hover:text-white "
-                />
-                <h3 className="text-base text-[#DBE2EF] group-hover:text-white font-semibold ">
-                  Ads
-                </h3>
-              </Link>
-              <Link
-                href="/profile"
-                className="flex transition-all mb-2 justify-start items-center gap-4 pl-5 hover:bg-[#3F72AF] p-2 rounded-md group cursor-pointer hover:shadow-lg m-auto"
-              >
-                <UserCircleIcon
-                  width={24}
-                  height={24}
-                  className="text-2xl text-[#DBE2EF] group-hover:text-white "
-                />
-                <h3 className="text-base text-[#DBE2EF] group-hover:text-white font-semibold ">
-                  Profile
-                </h3>
-              </Link>
-              <div className="flex transition-all mb-2 justify-start items-center gap-4 pl-5 hover:bg-[#3F72AF] p-2 rounded-md group cursor-pointer hover:shadow-lg m-auto">
-                <ChatBubbleLeftEllipsisIcon
-                  width={24}
-                  height={24}
-                  className="text-2xl text-[#DBE2EF] group-hover:text-white "
-                />
-                <h3 className="text-base text-[#DBE2EF] group-hover:text-white font-semibold ">
-                  Comments
-                </h3>
-              </div>
-              <div className="flex transition-all mb-2 justify-start items-center gap-4 pl-5 hover:bg-[#3F72AF] p-2 rounded-md group cursor-pointer hover:shadow-lg m-auto">
-                <ChartBarSquareIcon
-                  width={24}
-                  height={24}
-                  className="text-2xl text-[#DBE2EF] group-hover:text-white "
-                />
-                <h3 className="text-base text-[#DBE2EF] group-hover:text-white font-semibold ">
-                  Analytics
-                </h3>
-              </div>
-              <div className="flex transition-all mb-2 justify-start items-center gap-4 pl-5 hover:bg-[#3F72AF] p-2 rounded-md group cursor-pointer hover:shadow-lg m-auto">
-                <ChatBubbleOvalLeftEllipsisIcon
-                  width={24}
-                  height={24}
-                  className="text-2xl text-[#DBE2EF] group-hover:text-white "
-                />
-                <h3 className="text-base text-[#DBE2EF] group-hover:text-white font-semibold ">
-                  Messages
-                </h3>
-              </div>
-              {/* <div className="flex transition-all mb-2 justify-start items-center gap-4 pl-5 hover:bg-[#3F72AF] p-2 rounded-md group cursor-pointer hover:shadow-lg m-auto">
-                <MdOutlineIntegrationInstructions className="text-2xl text-[#DBE2EF] group-hover:text-white " />
-                <h3 className="text-base text-[#DBE2EF] group-hover:text-white font-semibold ">
-                  Integration
-                </h3>
-              </div> */}
+              {sideBarLinks.map((link) => (
+                <Link
+                  key={link.id}
+                  href={link.link}
+                  className="flex transition-all mb-2 justify-start items-center gap-4 pl-5 hover:bg-[#3F72AF] p-2 rounded-md group cursor-pointer hover:shadow-lg m-auto"
+                >
+                  {link.chilren}
+                  <h3 className="text-base text-[#DBE2EF] group-hover:text-white font-semibold ">
+                    {link.name}
+                  </h3>
+                </Link>
+              ))}
             </div>
             {/* setting  */}
             <div className=" my-4 border-b border-gray-100 pb-4">
@@ -144,7 +153,7 @@ function SideNavbar() {
                   className="text-2xl text-[#DBE2EF] group-hover:text-white "
                 />
                 <h3 className="text-base text-[#DBE2EF] group-hover:text-white font-semibold ">
-                  Settings
+                  Sozlamalar
                 </h3>
               </div>
               <div className="flex mb-2 justify-start items-center gap-4 pl-5 hover:bg-[#3F72AF] p-2 rounded-md group cursor-pointer hover:shadow-lg m-auto">
@@ -154,7 +163,7 @@ function SideNavbar() {
                   className="text-2xl text-[#DBE2EF] group-hover:text-white "
                 />
                 <h3 className="text-base text-[#DBE2EF] group-hover:text-white font-semibold ">
-                  More
+                  Yana
                 </h3>
               </div>
             </div>
@@ -167,7 +176,7 @@ function SideNavbar() {
                   className="text-2xl text-[#DBE2EF] group-hover:text-white "
                 />
                 <h3 className="text-base text-[#DBE2EF] group-hover:text-white font-semibold ">
-                  Logout
+                  Chiqish
                 </h3>
               </div>
             </div>

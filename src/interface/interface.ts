@@ -29,8 +29,8 @@ interface IStudents {
   group: ISelectGroup[] | string
   personalPhone: string
   homePhone: string
-  certificate: string
-  graduated: string
+  certificate: boolean | string
+  graduated: boolean | string
   userPhoto: string | null
   userPercentage: number
   createdAt: Date

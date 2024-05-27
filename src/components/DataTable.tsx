@@ -21,32 +21,32 @@ function DataTable({loading, students}: TDataTable) {
       className: "w-[65px]",
     },
     {
-      title: "FullName",
+      title: "Ism Familya",
       dataIndex: "fullName",
       key: "fullName",
     },
     {
-      title: "Address",
+      title: "Manzil",
       dataIndex: "address",
       key: "address",
     },
     {
-      title: "Birthday",
+      title: "Tug'ilgan kun",
       dataIndex: "birthday",
       key: "birthday",
     },
     {
-      title: "Group",
+      title: "Guruh",
       dataIndex: "group",
       key: "group",
     },
     {
-      title: "Phone",
+      title: "Shaxsiy raqami",
       dataIndex: "personalPhone",
       key: "personalPhone",
     },
     {
-      title: "Options",
+      title: "Tahrirlash",
       className: "w-[120px]",
       key: "options",
       render: (student: IStudents) => (

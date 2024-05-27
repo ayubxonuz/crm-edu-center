@@ -25,20 +25,20 @@ function Students() {
   })
 
   const graduatedLength =
-    data?.filter((item) => item.graduated === "yes").length ?? 0
+    data?.filter((item) => item.graduated === true).length ?? 0
 
   const noGraduatedLength =
-    data?.filter((item) => item.graduated == "no").length ?? 0
+    data?.filter((item) => item.graduated == false).length ?? 0
 
   return (
     <main className="grid gap-y-5">
       <Header
         buttonOne={{
-          text: "FILTER",
+          text: "QIDIRUV",
           icon: <FunnelIcon width={21} height={21} />,
         }}
         buttonTwo={{
-          text: "ADD STUDENTS",
+          text: "QO'SHISH",
           click: () => dispatch(toggleAddStudentFunc()),
         }}
         text="Students"
@@ -62,7 +62,7 @@ function Students() {
         <Score
           icon={<UserGroupIcon width={20} height={20} />}
           title="Ustozlar"
-          total={13}
+          total={4}
         />
       </div>
       <FilterAndAddData />

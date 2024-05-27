@@ -4,6 +4,7 @@ import NextTopLoader from "nextjs-toploader"
 import SideNavbar from "@/components/SideNavbar"
 import {ReduxProvider} from "@/provider/ReduxProvider"
 import {Inter} from "next/font/google"
+import Chat from "@/components/Chat"
 
 export const metadata: Metadata = {
   title: "CRM-admin-panel",
@@ -29,6 +30,7 @@ export default function RootLayout({
             {children}
           </div>
         </ReduxProvider>
+        <Chat />
       </body>
     </html>
   )

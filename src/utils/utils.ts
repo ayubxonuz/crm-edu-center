@@ -1,23 +1,5 @@
 import {SelectProps} from "antd"
 import axios from "axios"
-export const tabsData = [
-  {
-    id: 1,
-    name: "students",
-    link: "/",
-  },
-  {
-    id: 2,
-    name: "courses",
-    link: "/courses",
-  },
-  {
-    id: 3,
-    name: "lessons",
-    link: "/lessons",
-  },
-]
-
 const baseURL = "https://it-center-admin-panel.vercel.app/api/"
 export const customFetch = axios.create({
   baseURL: baseURL,
@@ -71,7 +53,6 @@ export const filterOptionSelect = (
   input: string,
   option?: {label: string; value: string}
 ) => (option?.label ?? "").toLowerCase().includes(input.toLowerCase())
-
 
 export const selectGroup: SelectProps["options"] = [
   {
