@@ -22,6 +22,8 @@ function Students() {
       const students: {data: IStudents[]} = await customFetch("/students")
       return students.data
     },
+    staleTime: 0,
+    refetchOnWindowFocus: false,
   })
 
   const graduatedLength =

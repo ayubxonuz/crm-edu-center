@@ -28,6 +28,7 @@ const ModalPromise = ({children, key, title, url}: ModalPromiseType) => {
     onSuccess: () => {
       queryClient.invalidateQueries()
     },
+    gcTime: 1,
   })
 
   const showPromiseConfirm = () => {
