@@ -17,9 +17,19 @@ import {
   ArrowTrendingDownIcon,
   ClipboardDocumentCheckIcon,
 } from "@heroicons/react/24/outline"
+import {useSelector} from "react-redux"
+import {RootState} from "@/lib/store"
+import {useRouter} from "next/navigation"
 const {Meta} = Card
 
 function Ads() {
+  const router = useRouter()
+  const {admin} = useSelector((state: RootState) => state.adminSlice)
+
+  if (!admin) {
+    router.push("/login")
+  }
+
   const {data: ads, isPending} = useQuery({
     queryKey: ["ads"],
     queryFn: async () => {

@@ -1,10 +1,9 @@
 "use client"
+import {setAdmin} from "@/lib/features/admin/adminSlice"
 import {Disclosure} from "@headlessui/react"
 import {
   Bars3Icon,
   ChartBarSquareIcon,
-  ChatBubbleLeftEllipsisIcon,
-  ChatBubbleOvalLeftEllipsisIcon,
   Cog6ToothIcon,
   EllipsisHorizontalIcon,
   ExclamationCircleIcon,
@@ -16,8 +15,10 @@ import {
 } from "@heroicons/react/24/outline"
 
 import Link from "next/link"
+import {useDispatch} from "react-redux"
 
 function SideNavbar() {
+  const dispatch = useDispatch()
   const sideBarLinks = [
     {
       id: 1,
@@ -80,35 +81,11 @@ function SideNavbar() {
       ),
     },
     {
-      id: 6,
-      name: "Sharhlar",
-      link: "/comments",
-      chilren: (
-        <ChatBubbleLeftEllipsisIcon
-          className="text-2xl text-[#DBE2EF] group-hover:text-white"
-          width={24}
-          height={24}
-        />
-      ),
-    },
-    {
       id: 7,
       name: "Analytics",
       link: "/analytics",
       chilren: (
         <ChartBarSquareIcon
-          className="text-2xl text-[#DBE2EF] group-hover:text-white"
-          width={24}
-          height={24}
-        />
-      ),
-    },
-    {
-      id: 8,
-      name: "Habarlar",
-      link: "/messages",
-      chilren: (
-        <ChatBubbleOvalLeftEllipsisIcon
           className="text-2xl text-[#DBE2EF] group-hover:text-white"
           width={24}
           height={24}
@@ -168,7 +145,13 @@ function SideNavbar() {
               </div>
             </div>
             {/* logout */}
-            <div className=" my-4">
+            <button
+              onClick={() => {
+                dispatch(setAdmin(false))
+                localStorage.removeItem("auth")
+              }}
+              className="my-4"
+            >
               <div className="flex mb-2 justify-start items-center gap-4 pl-5 border border-gray-200  hover:bg-[#3F72AF] p-2 rounded-md group cursor-pointer hover:shadow-lg m-auto">
                 <ExclamationCircleIcon
                   width={24}
@@ -179,7 +162,7 @@ function SideNavbar() {
                   Chiqish
                 </h3>
               </div>
-            </div>
+            </button>
           </div>
         </div>
       </Disclosure>

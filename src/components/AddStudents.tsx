@@ -51,14 +51,14 @@ function AddData({isOpen}: {isOpen: boolean}) {
   })
 
   const onSubmit = (studentsFormData: TInputs) => {
-    // const isEmpty = Object.values(studentsFormData).some(
-    //   (val) =>
-    //     val == null || val === "" || fileUpload.current?.files?.length == 0
-    // )
+    const isEmpty = Object.values(studentsFormData).some(
+      (val) =>
+        val == null || val === "" || fileUpload.current?.files?.length == 0
+    )
 
-    // if (isEmpty) {
-    //   return toast.error("Please fill out the form")
-    // } else {
+    if (isEmpty) {
+      return toast.error("Please fill out the form")
+    } else {
       mutateAsync({
         _id: "",
         id: generateRandomNumber(),
@@ -73,8 +73,8 @@ function AddData({isOpen}: {isOpen: boolean}) {
         userPercentage: 13,
         userPhoto: selectImage,
         createdAt: new Date(),
-      }).then(() => {})
-    // }
+      })
+    }
     console.log(studentsFormData)
   }
 
