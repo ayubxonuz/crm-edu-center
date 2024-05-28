@@ -20,15 +20,17 @@ import {
 import {useSelector} from "react-redux"
 import {RootState} from "@/lib/store"
 import {useRouter} from "next/navigation"
+import {useEffect} from "react"
 const {Meta} = Card
 
 function Ads() {
   const router = useRouter()
   const {admin} = useSelector((state: RootState) => state.adminSlice)
-
-  if (!admin) {
-    router.push("/login")
-  }
+  useEffect(() => {
+    if (!admin) {
+      router.push("/login")
+    }
+  }, [router, admin])
 
   const {data: ads, isPending} = useQuery({
     queryKey: ["ads"],

@@ -15,13 +15,16 @@ import {
 } from "@heroicons/react/24/outline"
 import {useQuery} from "@tanstack/react-query"
 import {useRouter} from "next/navigation"
+import {useEffect} from "react"
 import {useDispatch, useSelector} from "react-redux"
 function Students() {
   const router = useRouter()
   const {admin} = useSelector((state: RootState) => state.adminSlice)
-  if (!admin) {
-    router.push("/login")
-  }
+  useEffect(() => {
+    if (!admin) {
+      router.push("/login")
+    }
+  }, [admin, router])
 
   const dispatch = useDispatch()
   const {data, isPending} = useQuery({
