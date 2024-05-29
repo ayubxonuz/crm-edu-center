@@ -97,6 +97,12 @@ export const selectGroup: SelectProps["options"] = [
     desc: "Android",
   },
   {
+    label: "Backend",
+    value: "Backend",
+    emoji: "https://neunen.com/wp-content/uploads/backend.png",
+    desc: "Backend",
+  },
+  {
     label: "Literacy",
     value: "Literacy",
     emoji:

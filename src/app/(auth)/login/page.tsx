@@ -5,6 +5,7 @@ import {Input} from "antd"
 import {useRouter} from "next/navigation"
 import {FormEvent} from "react"
 import {useDispatch} from "react-redux"
+import {EyeInvisibleOutlined, EyeTwoTone} from "@ant-design/icons"
 import {toast} from "sonner"
 
 function Login() {
@@ -15,7 +16,7 @@ function Login() {
     const formData = new FormData(e.currentTarget)
     const login = formData.get("login")
     const password = formData.get("password")
-    if (login == "admin" && password == "ayubxon") {
+    if (login == "it_center" && password == "2933996") {
       dispatch(setAdmin(true))
       router.push("/")
       return null
@@ -29,7 +30,13 @@ function Login() {
         <h4 className="text-center font-bold text-3xl">Login</h4>
         <form onSubmit={handleSubmit} className="grid grid-cols-1 gap-y-2 mt-6">
           <Input name="login" className="h-10" placeholder="Login" />
-          <Input name="password" className="h-10" placeholder="Parol" />
+          <Input.Password
+            name="password"
+            placeholder="Parol"
+            iconRender={(visible) =>
+              visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />
+            }
+          />
           <Btn htmlType="submit">Login</Btn>
         </form>
       </div>
