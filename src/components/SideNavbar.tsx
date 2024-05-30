@@ -14,10 +14,8 @@ import {
 } from "@heroicons/react/24/outline"
 
 import Link from "next/link"
-import {useDispatch} from "react-redux"
 
 function SideNavbar() {
-  const dispatch = useDispatch()
   const sideBarLinks = [
     {
       id: 1,
@@ -146,7 +144,6 @@ function SideNavbar() {
             {/* logout */}
             <button
               onClick={() => {
-                dispatch(setAdmin(false))
                 localStorage.removeItem("auth")
               }}
               className="my-4"
