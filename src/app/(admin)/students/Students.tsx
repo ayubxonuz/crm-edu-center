@@ -4,7 +4,6 @@ import FilterAndAddData from "@/components/FilterAddEdit"
 import Header from "@/components/Header"
 import Score from "@/components/Score"
 import {toggleAddStudentFunc} from "@/lib/features/toggle/toggleSlice"
-import {RootState} from "@/lib/store"
 import {customFetch} from "@/utils/utils"
 import {
   ArchiveBoxArrowDownIcon,
@@ -14,18 +13,8 @@ import {
   UserGroupIcon,
 } from "@heroicons/react/24/outline"
 import {useQuery} from "@tanstack/react-query"
-import {useRouter} from "next/navigation"
-import {useEffect} from "react"
-import {useDispatch, useSelector} from "react-redux"
+import {useDispatch} from "react-redux"
 function Students() {
-  const router = useRouter()
-  const {admin} = useSelector((state: RootState) => state.adminSlice)
-  useEffect(() => {
-    if (!admin) {
-      router.push("/login")
-    }
-  }, [admin, router])
-
   const dispatch = useDispatch()
   const {data, isPending} = useQuery({
     queryKey: ["students"],
@@ -75,6 +64,11 @@ function Students() {
         <Score
           icon={<UserGroupIcon width={20} height={20} />}
           title="Ustozlar"
+          total={4}
+        />
+        <Score
+          icon={<UserGroupIcon width={20} height={20} />}
+          title="Ro'yxatga olish"
           total={4}
         />
       </div>

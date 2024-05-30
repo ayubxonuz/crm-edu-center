@@ -1,10 +1,9 @@
 import {configureStore} from "@reduxjs/toolkit"
 import toggleSlice from "./features/toggle/toggleSlice"
 import studentSlice from "./features/student/studentSlice"
-import adminSlice from "./features/admin/adminSlice"
 export const store = () => {
   return configureStore({
-    reducer: {toggleSlice, studentSlice, adminSlice},
+    reducer: {toggleSlice, studentSlice},
   })
 }
 

@@ -9,7 +9,7 @@ type Tscore = {
 
 function Score({title, total, icon}: Tscore) {
   return (
-    <Card>
+    <Card className="border hover:border-black transition-all cursor-pointer select-none">
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
         <CardTitle className="text-sm font-medium">{title}</CardTitle>
         {icon}

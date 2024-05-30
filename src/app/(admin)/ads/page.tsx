@@ -17,15 +17,13 @@ import {
   ArrowTrendingDownIcon,
   ClipboardDocumentCheckIcon,
 } from "@heroicons/react/24/outline"
-import {useSelector} from "react-redux"
-import {RootState} from "@/lib/store"
 import {useRouter} from "next/navigation"
 import {useEffect} from "react"
 const {Meta} = Card
 
 function Ads() {
   const router = useRouter()
-  const {admin} = useSelector((state: RootState) => state.adminSlice)
+  const admin = 0
   useEffect(() => {
     if (!admin) {
       router.push("/login")

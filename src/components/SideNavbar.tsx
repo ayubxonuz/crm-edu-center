@@ -1,5 +1,4 @@
 "use client"
-import {setAdmin} from "@/lib/features/admin/adminSlice"
 import {Disclosure} from "@headlessui/react"
 import {
   Bars3Icon,
