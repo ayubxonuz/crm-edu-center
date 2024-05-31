@@ -13,8 +13,15 @@ import {
   UserGroupIcon,
 } from "@heroicons/react/24/outline"
 import {useQuery} from "@tanstack/react-query"
+import {useRouter} from "next/navigation"
 import {useDispatch} from "react-redux"
 function Students() {
+  const admin = localStorage.getItem("auth")
+  const route = useRouter()
+  if (!admin) {
+    route.push("/login")
+  }
+
   const dispatch = useDispatch()
   const {data, isPending} = useQuery({
     queryKey: ["students"],

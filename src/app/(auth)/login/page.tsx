@@ -1,10 +1,10 @@
 "use client"
-import Btn from "@/components/antdUI/Btn"
 import {Input} from "antd"
 import {useRouter} from "next/navigation"
 import {FormEvent} from "react"
 import {EyeInvisibleOutlined, EyeTwoTone} from "@ant-design/icons"
 import {toast} from "sonner"
+import Btn from "@/components/antdUI/Btn"
 
 function Login() {
   const router = useRouter()
@@ -14,6 +14,7 @@ function Login() {
     const login = formData.get("login")
     const password = formData.get("password")
     if (login == "it_center" && password == "2933996") {
+      localStorage.setItem("auth", JSON.stringify(true))
       router.push("/")
       return null
     } else {

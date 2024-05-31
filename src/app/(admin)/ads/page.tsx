@@ -18,18 +18,14 @@ import {
   ClipboardDocumentCheckIcon,
 } from "@heroicons/react/24/outline"
 import {useRouter} from "next/navigation"
-import {useEffect} from "react"
 const {Meta} = Card
 
 function Ads() {
-  const router = useRouter()
-  const admin = 0
-  useEffect(() => {
-    if (!admin) {
-      router.push("/login")
-    }
-  }, [router, admin])
-
+  const admin = localStorage.getItem("auth")
+  const route = useRouter()
+  if (!admin) {
+    route.push("/login")
+  }
   const {data: ads, isPending} = useQuery({
     queryKey: ["ads"],
     queryFn: async () => {
