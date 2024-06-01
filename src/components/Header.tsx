@@ -4,7 +4,7 @@ import {
   toggleFilterFunc,
 } from "@/lib/features/toggle/toggleSlice"
 import {RootState} from "@/lib/store"
-import {PlusIcon} from "@heroicons/react/24/outline"
+import {ClipboardDocumentListIcon, PlusIcon} from "@heroicons/react/24/outline"
 import {Button} from "antd"
 import {ReactNode} from "react"
 import {useDispatch, useSelector} from "react-redux"
@@ -19,11 +19,15 @@ type THeader = {
     text: string
     click: () => void
   }
+  buttonThree?: {
+    text: string
+    click: () => void
+  }
 }
 
-function Header({text, buttonOne, buttonTwo}: THeader) {
+function Header({text, buttonOne, buttonTwo, buttonThree}: THeader) {
   const dispatch = useDispatch()
-  const {toggleFilterValue, toggleAddStudentValue} = useSelector(
+  const {toggleFilterValue} = useSelector(
     (store: RootState) => store.toggleSlice
   )
   return (
@@ -54,9 +58,20 @@ function Header({text, buttonOne, buttonTwo}: THeader) {
               {buttonTwo?.text}
             </Button>
           )}
+          {buttonThree && (
+            <Button
+              type={"primary"}
+              size="large"
+              onClick={() => buttonThree.click()}
+              className="flex items-center"
+              icon={<ClipboardDocumentListIcon width={21} height={21} />}
+            >
+              {buttonThree?.text}
+            </Button>
+          )}
         </div>
       </div>
-      <hr className="border-black border-opacity-25 mt-4 mb-10" />
+      <hr className="border-black border-opacity-25 mt-4" />
     </div>
   )
 }

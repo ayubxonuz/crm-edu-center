@@ -50,6 +50,10 @@ function Students() {
           text: "QO'SHISH",
           click: () => dispatch(toggleAddStudentFunc()),
         }}
+        buttonThree={{
+          text: "RO'YXATGA OLISH",
+          click: () => console.log(1),
+        }}
         text="Students"
       />
       <div className="grid grid-cols-4 max-[1900px]:grid-cols-3 gap-5 mb-5">
