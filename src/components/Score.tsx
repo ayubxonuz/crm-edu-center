@@ -1,3 +1,4 @@
+"use client"
 import {ReactNode} from "react"
 import {Card, CardContent, CardHeader, CardTitle} from "./ui/card"
 
@@ -5,11 +6,18 @@ type Tscore = {
   title: string
   total: number
   icon: ReactNode
+  active?: boolean
+  onClick: () => void
 }
 
-function Score({title, total, icon}: Tscore) {
+function Score({title, total, icon, active, onClick}: Tscore) {
   return (
-    <Card className="border hover:border-black transition-all cursor-pointer select-none">
+    <Card
+      onClick={onClick}
+      className={`border ${
+        active && "border-black"
+      } transition-all cursor-pointer select-none`}
+    >
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
         <CardTitle className="text-sm font-medium">{title}</CardTitle>
         {icon}

@@ -32,6 +32,9 @@ export const POST = async (req: Request) => {
     graduated,
     userPercentage,
     userPhoto,
+    quizLevel,
+    videoLevel,
+    groupName,
   }: IStudents = await req.json()
   try {
     await connectMongoDB()
@@ -47,6 +50,9 @@ export const POST = async (req: Request) => {
       graduated,
       userPercentage,
       userPhoto,
+      quizLevel,
+      videoLevel,
+      groupName,
     })
     return NextResponse.json({message: "OK"}, {status: 200})
   } catch (error) {

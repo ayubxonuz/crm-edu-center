@@ -35,6 +35,9 @@ interface IStudents {
   userPercentage: number
   createdAt: Date
   updatedAt?: Date
+  quizLevel: number
+  videoLevel: number
+  groupName: string
 }
 
 interface ICategory {

@@ -13,6 +13,9 @@ const studentsSchema = new Schema(
     graduated: Boolean,
     userPercentage: Number,
     userPhoto: String,
+    quizLevel: Number,
+    videoLevel: Number,
+    groupName: String,
   },
   {
     timestamps: true,

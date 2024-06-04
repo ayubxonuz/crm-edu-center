@@ -39,6 +39,9 @@ export const PUT = async (req: Request, {params}: {params: {id: number}}) => {
     graduated,
     userPercentage,
     userPhoto,
+    quizLevel,
+    videoLevel,
+    groupName,
   }: IStudents = await req.json()
   await connectMongoDB()
   await Students.findByIdAndUpdate(id, {
@@ -52,6 +55,9 @@ export const PUT = async (req: Request, {params}: {params: {id: number}}) => {
     graduated,
     userPercentage,
     userPhoto,
+    quizLevel,
+    videoLevel,
+    groupName,
   })
   return NextResponse.json({message: "OK"}, {status: 200})
 }

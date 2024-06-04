@@ -6,6 +6,7 @@ export const toggleSlice = createSlice({
     toggleFilterValue: false,
     toggleAddStudentValue: false,
     toggleEditStudentValue: false,
+    toggleRegistrationValue: false,
   },
   reducers: {
     toggleFilterFunc: (state) => {
@@ -19,9 +20,16 @@ export const toggleSlice = createSlice({
     toggleEditStudentFunc: (state) => {
       state.toggleEditStudentValue = !state.toggleEditStudentValue
     },
+    toggleRegistrationFunc: (state) => {
+      state.toggleRegistrationValue = !state.toggleRegistrationValue
+    },
   },
 })
 
-export const {toggleFilterFunc, toggleAddStudentFunc, toggleEditStudentFunc} =
-  toggleSlice.actions
+export const {
+  toggleFilterFunc,
+  toggleAddStudentFunc,
+  toggleEditStudentFunc,
+  toggleRegistrationFunc,
+} = toggleSlice.actions
 export default toggleSlice.reducer
