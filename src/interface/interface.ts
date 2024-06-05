@@ -40,6 +40,16 @@ interface IStudents {
   groupName: string
 }
 
+type TNotification = {
+  _id: string
+  id: number
+  title: string
+  comment: string
+  image: string
+  createdAt: Date
+  updatedAt: Date
+}
+
 interface ICategory {
   id: number
   image: string

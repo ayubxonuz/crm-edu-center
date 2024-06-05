@@ -39,15 +39,12 @@ function AddRegistration({isOpen}: {isOpen: boolean}) {
     },
   })
 
-  const onSubmit = (e: RegisterInputType) => {
-    const isEmpty = Object.values(e).some((val) => val == null || val == "")
+  const onSubmit = (data: RegisterInputType) => {
+    const isEmpty = Object.values(data).some((val) => val == null || val == "")
     if (isEmpty) {
       return toast.error("Please fill out the form")
     } else {
-      mutateAsync({
-        fullName: e.fullName,
-        number: e.number,
-      })
+      mutateAsync(data)
     }
   }
 
@@ -59,7 +56,7 @@ function AddRegistration({isOpen}: {isOpen: boolean}) {
         open={isOpen}
         okText="Qo'shish"
         cancelText="Bekor qilish"
-        onOk={() => onSubmit}
+        onOk={() => handleSubmit(onSubmit)()}
         onCancel={() => dispatch(toggleRegistrationFunc())}
         width={700}
       >
@@ -117,4 +114,5 @@ function AddRegistration({isOpen}: {isOpen: boolean}) {
     </>
   )
 }
+
 export default AddRegistration
